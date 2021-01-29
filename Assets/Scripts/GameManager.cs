@@ -1,27 +1,24 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
     public float TimeLeftInSeconds = 900f;
+    public static event EventHandler TimeUp;
 
-    public GameObject Hero;
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private bool _timeUpFired = false;
 
-    // Update is called once per frame
     void Update()
     {
         TimeLeftInSeconds -= Time.deltaTime;
-        if(TimeLeftInSeconds <= 0)
+        if(TimeLeftInSeconds <= 0 && !_timeUpFired)
         {
             // Start Time's up sequence
-            Debug.Log("Oy, Time's up!");
+            TimeUp.Invoke(this, new EventArgs());
+            _timeUpFired = true;
         }
     }
 }
