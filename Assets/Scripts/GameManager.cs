@@ -15,9 +15,10 @@ public class GameManager : MonoBehaviour
     public Tile DarkTile;
     public Tile BlurredTile;
 
-    //TODO: Show timer in UI
-    public static float TimeLeftInSeconds = 900f;
+    public float TimeLeftInSeconds = 900f;
     public static event EventHandler TimeUp;
+    public static bool GameOver = false;
+
     public bool TimeCountDown = true;
 
     private bool _timeUpFired = false;
@@ -26,6 +27,10 @@ public class GameManager : MonoBehaviour
     {
         DarkMap.origin = BlurredMap.origin = BackgroundMap.origin = WallMap.origin;
         DarkMap.size = BlurredMap.size = BackgroundMap.size = WallMap.size;
+
+        GameOver = false;
+        Time.timeScale = 1.0f;
+        TimeLeftInSeconds = 900f;
 
         foreach (var p in DarkMap.cellBounds.allPositionsWithin)
         {

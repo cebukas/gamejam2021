@@ -22,4 +22,9 @@ public class Health : MonoBehaviour
         if(health != 3)
             health++;
     }
+
+    internal int GetHealth()
+    {
+        return health;
+    }
 }
