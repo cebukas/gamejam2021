@@ -17,7 +17,6 @@ public class Lever : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        Debug.Log("Lever interacts");
         SwitchState();
      
         if (ControlledGameObject != null)
