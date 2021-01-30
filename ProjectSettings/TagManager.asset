@@ -17,7 +17,7 @@ TagManager:
   - 
   - 
   - Player
-  - 
+  - sprite
   - 
   - 
   - 
@@ -46,4 +46,10 @@ TagManager:
     locked: 0
   - name: walls
     uniqueID: 188798291
+    locked: 0
+  - name: sprite
+    uniqueID: 3360773739
+    locked: 0
+  - name: Player
+    uniqueID: 2898581685
     locked: 0
