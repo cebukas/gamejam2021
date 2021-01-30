@@ -75,7 +75,6 @@ public class CharacterMovement : MonoBehaviour
         setAnimatorConditions(false, false, false, false);
 
         if(speedX <= -0.01f && speedX * (-1f) >= speedYPositive){
-            Debug.Log("Left");
             setAnimatorConditions(false, false, false, true);
         }
         if(speedX >= 0.01f && speedX >= speedYPositive){
