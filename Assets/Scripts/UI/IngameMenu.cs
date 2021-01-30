@@ -14,10 +14,19 @@ public class IngameMenu : MonoBehaviour
     private TextMeshProUGUI _timeText;
 
     [SerializeField]
+    private TextMeshProUGUI _liveCountText;
+
+    [SerializeField]
     private TextMeshProUGUI _notificationTextUI;
 
     [SerializeField]
-    private Button _restartButton; 
+    private Button _restartButton;
+
+    [SerializeField]
+    private GameManager _gameManager;
+
+    [SerializeField]
+    private GameObject _hero;
 
     public void EnableRestartButton()
     {
@@ -52,7 +61,7 @@ public class IngameMenu : MonoBehaviour
 
     private IEnumerator RestartLevelScene()
     {
-        var sceneLoad = SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
+        var sceneLoad = SceneManager.LoadSceneAsync("Menu");
 
         while (!sceneLoad.isDone)
         {
@@ -62,7 +71,8 @@ public class IngameMenu : MonoBehaviour
 
     void Update()
     {
-        _timeText.SetText($"Time left: {Math.Round(GameManager.TimeLeftInSeconds).ToString()}");
+        _liveCountText.SetText($"Lives: {_hero.GetComponent<Health>().GetHealth()}");
+        _timeText.SetText($"Time left: {Math.Round(_gameManager.TimeLeftInSeconds).ToString()}");
         _notificationTextUI.SetText(NotificationText);
     }
 }
