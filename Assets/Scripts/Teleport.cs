@@ -14,7 +14,7 @@ public class Teleport : MonoBehaviour
     }
     void FixedUpdate()
     {
-        if (Vector3.Distance(player.GetComponent<Transform>().position, trigger.position) <= 0.5f){
+        if (Vector3.Distance(player.GetComponent<Transform>().position, trigger.position) <= 1f){
             player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
             StartCoroutine("FadeIn");
             player.GetComponent<Transform>().position = destination.position;
@@ -28,6 +28,7 @@ public class Teleport : MonoBehaviour
             yield return new WaitForSeconds (0.05f);
         }
         player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
+        player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 
     IEnumerator FadeOut(){

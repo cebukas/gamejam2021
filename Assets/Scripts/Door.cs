@@ -17,13 +17,17 @@ public class Door : MonoBehaviour, IControllable
 
         if (_opened)
         {
-            GetComponent<SpriteRenderer>().enabled = false;
-            GetComponent<Collider2D>().isTrigger = true;
+            foreach(var s in GetComponentsInChildren<SpriteRenderer>())
+                s.enabled = false;
+            foreach(var c in GetComponentsInChildren<Collider2D>())
+                c.isTrigger = true;
         }
         else
         {
-            GetComponent<SpriteRenderer>().enabled = true;
-            GetComponent<Collider2D>().isTrigger = false;
+            foreach(var s in GetComponentsInChildren<SpriteRenderer>())
+                s.enabled = true;
+            foreach(var c in GetComponentsInChildren<Collider2D>())
+                c.isTrigger = false;
         }
     }
 }
