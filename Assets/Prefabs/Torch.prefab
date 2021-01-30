@@ -46,7 +46,7 @@ MonoBehaviour:
   m_LightType: 3
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.990566, g: 0.45923412, b: 0, a: 1}
   m_Intensity: 1
   m_LightVolumeOpacity: 0
   m_ApplyToSortingLayers: 00000000
@@ -180,7 +180,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 4429642fd5e2f784989f6d2b692761cc, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.7848822, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -253,6 +253,7 @@ MonoBehaviour:
   AddSize: 0.0517
   _torchLit: {fileID: 21300000, guid: 4429642fd5e2f784989f6d2b692761cc, type: 3}
   _torchUnlit: {fileID: 21300000, guid: 86131f96acd66614b8faedf3e7614dee, type: 3}
+  _lightSource: {fileID: 0}
   _sMask: {fileID: 6454856248791087077}
 --- !u!1 &6454856248997044311
 GameObject:
