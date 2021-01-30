@@ -23,9 +23,8 @@ public class Lever : MonoBehaviour, IInteractable
         {
             foreach(var controlledObject in ControlledGameObjects)
             {
-
+                controlledObject.GetComponent<IControllable>().Control();
             }
-            ControlledGameObject.GetComponent<IControllable>().Control();
         }
         else
         {

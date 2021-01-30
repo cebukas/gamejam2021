@@ -278,6 +278,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e6ca564158d3d940ad8f14228837f12, type: 3}
+--- !u!1 &1094273178 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5658891408137436434, guid: 5e6ca564158d3d940ad8f14228837f12,
+    type: 3}
+  m_PrefabInstance: {fileID: 1983364668}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1516011854
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -290,6 +296,21 @@ PrefabInstance:
       propertyPath: ControlledGameObject
       value: 
       objectReference: {fileID: 1764515120}
+    - target: {fileID: 3736907280660358916, guid: 1c80078b02676cb4a99bff351887134f,
+        type: 3}
+      propertyPath: ControlledGameObjects.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3736907280660358916, guid: 1c80078b02676cb4a99bff351887134f,
+        type: 3}
+      propertyPath: ControlledGameObjects.Array.data[0]
+      value: 
+      objectReference: {fileID: 1764515120}
+    - target: {fileID: 3736907280660358916, guid: 1c80078b02676cb4a99bff351887134f,
+        type: 3}
+      propertyPath: ControlledGameObjects.Array.data[1]
+      value: 
+      objectReference: {fileID: 1094273178}
     - target: {fileID: 3736907280660358969, guid: 1c80078b02676cb4a99bff351887134f,
         type: 3}
       propertyPath: m_Name
