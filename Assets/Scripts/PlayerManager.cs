@@ -18,6 +18,7 @@ public class PlayerManager : MonoBehaviour
     private void Health_DeathFromDamage(object sender, EventArgs e)
     {
         Hero.GetComponent<CharacterMovement>().Freeze();
+        FindObjectOfType<AudioManager>().Play("Lose");
     }
 
     private void GameManager_TimeUp(object sender, EventArgs e)
