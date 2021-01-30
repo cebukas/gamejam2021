@@ -13,6 +13,12 @@ public class PlayerManager : MonoBehaviour
     {
         GameManager.TimeUp += GameManager_TimeUp;
         Health.DeathFromDamage += Health_DeathFromDamage;
+        FallTrap.PlayerInTrap += FallTrap_PlayerInTrap;
+    }
+
+    private void FallTrap_PlayerInTrap(object sender, EventArgs e)
+    {
+        Hero.GetComponent<CharacterMovement>().Freeze();
     }
 
     private void Health_DeathFromDamage(object sender, EventArgs e)
