@@ -18,7 +18,7 @@ public class Lever : MonoBehaviour, IInteractable
     public void Interact()
     {
         SwitchState();
-     
+
         if (ControlledGameObject != null)
         {
             ControlledGameObject.GetComponent<IControllable>().Control();
@@ -32,7 +32,7 @@ public class Lever : MonoBehaviour, IInteractable
     private void SwitchState()
     {
         _leverEnabled = !_leverEnabled;
-        if(_leverEnabled)
+        if (_leverEnabled)
         {
             GetComponent<SpriteRenderer>().sprite = _leverDown;
         }
