@@ -4,22 +4,20 @@ using UnityEngine;
 
 public class PressurePlate : MonoBehaviour, IInteractable
 {
+    public GameObject ControlledGameObject;
 
+    private bool _pressureApplied = false;
 
     public void Interact()
     {
-        throw new System.NotImplementedException();
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (ControlledGameObject != null && !_pressureApplied)
+        {
+            ControlledGameObject.GetComponent<IControllable>().Control();
+            _pressureApplied = true;
+        }
+        else if (ControlledGameObject == null)
+        {
+            Debug.LogWarning("Pressure plate doesn't control anything");
+        }
     }
 }

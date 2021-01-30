@@ -94,6 +94,11 @@ public class CharacterMovement : MonoBehaviour
             _interactionAvailable = true;
             _interactableGO = collision.gameObject;
         }
+
+        if(collision.gameObject.CompareTag("Trap"))
+        {
+            collision.gameObject.GetComponent<IInteractable>().Interact();
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
