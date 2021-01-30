@@ -5,17 +5,23 @@ using UnityEngine;
 
 public class Door : MonoBehaviour, IControllable
 {
-    private bool _opened = false;
-    public void Control()
+    public bool Opened;
+
+    void Start()
     {
-        Open();
+        FlipOpen();
     }
 
-    private void Open()
+    public void Control()
     {
-        _opened = !_opened;
+        FlipOpen();
+    }
 
-        if (_opened)
+    private void FlipOpen()
+    {
+        Opened = !Opened;
+
+        if (Opened)
         {
             foreach(var s in GetComponentsInChildren<SpriteRenderer>())
                 s.enabled = false;

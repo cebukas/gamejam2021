@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Lever : MonoBehaviour, IInteractable
 {
-    public GameObject ControlledGameObject;
+    public GameObject[] ControlledGameObjects;
 
     private bool _leverEnabled = false;
 
@@ -19,9 +19,12 @@ public class Lever : MonoBehaviour, IInteractable
     {
         SwitchState();
 
-        if (ControlledGameObject != null)
+        if (ControlledGameObjects != null)
         {
-            ControlledGameObject.GetComponent<IControllable>().Control();
+            foreach(var controlledObject in ControlledGameObjects)
+            {
+                controlledObject.GetComponent<IControllable>().Control();
+            }
         }
         else
         {
