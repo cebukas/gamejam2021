@@ -19,23 +19,26 @@ public class PlayerManager : MonoBehaviour
 
     private void FallTrap_PlayerInTrap(object sender, EventArgs e)
     {
-        Hero.GetComponent<CharacterMovement>().Freeze();
+        Death("You have died!");
     }
 
     private void Health_DeathFromDamage(object sender, EventArgs e)
     {
-        IngameMenu.NotificationText = "You have died!";
-        GameManager.GameOver = true;
-        Hero.GetComponent<CharacterMovement>().Freeze();
-        Time.timeScale = 0.0f;
-        FindObjectOfType<AudioManager>().Play("Lose");
+        Death("You have died!");
     }
 
     private void GameManager_TimeUp(object sender, EventArgs e)
     {
+        Death("Time's up!");
+    }
+
+    private void Death(string message)
+    {
         GameManager.GameOver = true;
-        IngameMenu.NotificationText = "Time's up!";
+        IngameMenu.NotificationText = message;
+        Hero.GetComponent<Animator>().SetTrigger("Death");
+        FindObjectOfType<AudioManager>().Play("Lose");
         Hero.GetComponent<CharacterMovement>().Freeze();
-        Time.timeScale = 0.0f;
+        GameManager.TimeCountDown = false;
     }
 }

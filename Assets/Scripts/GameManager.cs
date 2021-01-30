@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     public static event EventHandler TimeUp;
     public static bool GameOver = false;
 
-    public bool TimeCountDown = true;
+    public static bool TimeCountDown = true;
 
     private bool _timeUpFired = false;
 
