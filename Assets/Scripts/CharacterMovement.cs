@@ -16,7 +16,10 @@ public class CharacterMovement : MonoBehaviour
     private bool _interactionAvailable = false;
     private GameObject _interactableGO = null;
     public Animator animator;
-
+    private float speedX;
+    private float speedY;
+    private float speedXPositive;
+    private float speedYPositive;
     void Update()
     {
         // Read Player input
@@ -33,9 +36,8 @@ public class CharacterMovement : MonoBehaviour
                 InvokeInteraction();
             }
         }
-        animator.SetFloat("SpeedX", GetComponent<Rigidbody2D>().velocity.x);
-        animator.SetFloat("SpeedY", GetComponent<Rigidbody2D>().velocity.y);
     }
+
 
     private void FixedUpdate()
     {
@@ -55,6 +57,32 @@ public class CharacterMovement : MonoBehaviour
             _inputX = 0f;
             _inputY = 0f;
             GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
+        }
+        speedX = GetComponent<Rigidbody2D>().velocity.x;
+        speedY = GetComponent<Rigidbody2D>().velocity.y;
+
+        speedXPositive = speedX;
+        speedYPositive = speedY;
+        
+        if(speedX < 0)
+            speedXPositive = speedX * - 1;
+        if(speedY < 0)
+            speedYPositive = speedY * - 1;
+
+        setAnimatorConditions(false, false, false, false);
+
+        if(speedX <= -0.01f && speedX * (-1f) >= speedYPositive){
+            Debug.Log("Left");
+            setAnimatorConditions(false, false, false, true);
+        }
+        if(speedX >= 0.01f && speedX >= speedYPositive){
+            setAnimatorConditions(false, true, false, false);
+        }
+        if(speedY >= 0.01f && speedY >= speedXPositive){
+            setAnimatorConditions(true, false, false, false);
+        }
+        if(speedY <= -0.01f && speedY * (-1f) >= speedXPositive){
+            setAnimatorConditions(true, false, true, false);
         }
     }
 
@@ -111,5 +139,11 @@ public class CharacterMovement : MonoBehaviour
             _interactionAvailable = false;
             _interactableGO = null;
         }
+    }
+        private void setAnimatorConditions(bool runUp, bool runRight, bool runDown, bool runLeft){
+        animator.SetBool("RunRight", runRight);
+        animator.SetBool("RunLeft", runLeft);
+        animator.SetBool("RunUp", runUp);
+        animator.SetBool("RunDown", runDown);
     }
 }
