@@ -15,6 +15,7 @@ public class CharacterMovement : MonoBehaviour
     private bool _frozenMovement = false;
     private bool _interactionAvailable = false;
     private GameObject _interactableGO = null;
+    public Animator animator;
 
     void Update()
     {
@@ -32,6 +33,8 @@ public class CharacterMovement : MonoBehaviour
                 InvokeInteraction();
             }
         }
+        animator.SetFloat("SpeedX", GetComponent<Rigidbody2D>().velocity.x);
+        animator.SetFloat("SpeedY", GetComponent<Rigidbody2D>().velocity.y);
     }
 
     private void FixedUpdate()
