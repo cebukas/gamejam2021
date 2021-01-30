@@ -14,7 +14,6 @@
             transform.Translate(new Vector3(speed * Time.deltaTime, 0, 0) );
         }
 
-
         lifeTime -= Time.deltaTime;
         if (lifeTime <= 0){
             Destroy(this.gameObject);
