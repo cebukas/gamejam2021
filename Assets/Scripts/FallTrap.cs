@@ -1,18 +1,20 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FallTrap : MonoBehaviour
+public class FallTrap : MonoBehaviour, IInteractable
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public static event EventHandler PlayerInTrap;
 
-    // Update is called once per frame
-    void Update()
+    private bool _trapFired = false;
+
+    public void Interact()
     {
-        
+        if(!_trapFired)
+        {
+            Debug.Log("Sadkek u ded");
+            PlayerInTrap.Invoke(this, new EventArgs());
+        }
     }
 }
