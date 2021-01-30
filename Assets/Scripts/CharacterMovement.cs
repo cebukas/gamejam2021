@@ -24,14 +24,17 @@ public class CharacterMovement : MonoBehaviour
 
         if (_interactionAvailable)
         {
-            //TODO: Show "Press E" in the UI
-            Debug.Log($"Press {InteractButton.ToString()}");
 
             if (Input.GetKeyDown(InteractButton))
             {
                 InvokeInteraction();
             }
         }
+    }
+
+    private void Start()
+    {
+        _frozenMovement = false;
     }
 
     private void FixedUpdate()
@@ -74,6 +77,7 @@ public class CharacterMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("Interactable"))
         {
             _interactionAvailable = true;
+            IngameMenu.NotificationText = $"Press {InteractButton.ToString()}";
             _interactableGO = collision.gameObject;
         }
     }
@@ -83,6 +87,7 @@ public class CharacterMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("Interactable"))
         {
             _interactionAvailable = false;
+            IngameMenu.NotificationText = "";
             _interactableGO = null;
         }
     }
@@ -92,6 +97,7 @@ public class CharacterMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("Interactable"))
         {
             _interactionAvailable = true;
+            IngameMenu.NotificationText = $"Press {InteractButton.ToString()}";
             _interactableGO = collision.gameObject;
         }
 
@@ -106,6 +112,7 @@ public class CharacterMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("Interactable"))
         {
             _interactionAvailable = false;
+            IngameMenu.NotificationText = "";
             _interactableGO = null;
         }
     }

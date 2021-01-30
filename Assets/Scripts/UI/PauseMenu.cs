@@ -33,7 +33,7 @@ public class PauseMenu : MonoBehaviour
     {
         var sceneLoad = SceneManager.LoadSceneAsync("Menu");
 
-        while(!sceneLoad.isDone)
+        while (!sceneLoad.isDone)
         {
             yield return null;
         }
@@ -41,7 +41,7 @@ public class PauseMenu : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if(Input.GetKeyDown(KeyCode.Escape) && !GameManager.GameOver)
         {
             TogglePause();
         }

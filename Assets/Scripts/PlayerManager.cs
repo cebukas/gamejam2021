@@ -17,12 +17,18 @@ public class PlayerManager : MonoBehaviour
 
     private void Health_DeathFromDamage(object sender, EventArgs e)
     {
+        IngameMenu.NotificationText = "You have died!";
+        GameManager.GameOver = true;
         Hero.GetComponent<CharacterMovement>().Freeze();
+        Time.timeScale = 0.0f;
         FindObjectOfType<AudioManager>().Play("Lose");
     }
 
     private void GameManager_TimeUp(object sender, EventArgs e)
     {
+        GameManager.GameOver = true;
+        IngameMenu.NotificationText = "Time's up!";
         Hero.GetComponent<CharacterMovement>().Freeze();
+        Time.timeScale = 0.0f;
     }
 }
