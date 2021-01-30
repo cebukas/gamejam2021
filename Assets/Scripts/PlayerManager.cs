@@ -12,6 +12,12 @@ public class PlayerManager : MonoBehaviour
     void Start()
     {
         GameManager.TimeUp += GameManager_TimeUp;
+        Health.DeathFromDamage += Health_DeathFromDamage;
+    }
+
+    private void Health_DeathFromDamage(object sender, EventArgs e)
+    {
+        Hero.GetComponent<CharacterMovement>().Freeze();
     }
 
     private void GameManager_TimeUp(object sender, EventArgs e)
