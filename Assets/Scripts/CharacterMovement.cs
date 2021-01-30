@@ -13,6 +13,8 @@ public class CharacterMovement : MonoBehaviour
     private float _inputY;
 
     private bool _frozenMovement = false;
+    private bool _interactionAvailable = false;
+    private GameObject _interactableGO = null;
 
     void Update()
     {
@@ -20,16 +22,20 @@ public class CharacterMovement : MonoBehaviour
         _inputX = Input.GetAxis("Horizontal");
         _inputY = Input.GetAxis("Vertical");
 
-        if(Input.GetKey(InteractButton))
+        if (_interactionAvailable)
         {
-            InvokeInteraction();
+            //TODO: Show "Press E" in the UI
+            Debug.Log($"Press {InteractButton.ToString()}");
+
+            if (Input.GetKeyDown(InteractButton))
+            {
+                InvokeInteraction();
+            }
         }
     }
 
     private void FixedUpdate()
     {
-        CheckInteraction();
-
         if (_inputX != 0 && _inputY != 0)
         {
             // Movement is diagonal
@@ -49,18 +55,35 @@ public class CharacterMovement : MonoBehaviour
         }
     }
 
-    private void CheckInteraction()
-    {
-        // Launch 4 RayCasts, check if one of them hits interactable
-    }
-
     private void InvokeInteraction()
     {
-        Debug.Log("Still not implemented!");
+        if (_interactableGO != null)
+        {
+            var interactable = _interactableGO.GetComponent<IInteractable>();
+            interactable.Interact();
+        }
     }
 
     public void Freeze()
     {
         _frozenMovement = true;
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Interactable"))
+        {
+            _interactionAvailable = true;
+            _interactableGO = collision.gameObject;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Interactable"))
+        {
+            _interactionAvailable = false;
+            _interactableGO = null;
+        }
     }
 }

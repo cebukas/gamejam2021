@@ -6,19 +6,24 @@ using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
-    public float TimeLeftInSeconds = 900f;
+    //TODO: Show timer in UI
+    public static float TimeLeftInSeconds = 900f;
     public static event EventHandler TimeUp;
+    public bool TimeCountDown = true;
 
     private bool _timeUpFired = false;
 
     void Update()
     {
-        TimeLeftInSeconds -= Time.deltaTime;
-        if(TimeLeftInSeconds <= 0 && !_timeUpFired)
+        if (TimeCountDown)
         {
-            // Start Time's up sequence
-            TimeUp.Invoke(this, new EventArgs());
-            _timeUpFired = true;
+            TimeLeftInSeconds -= Time.deltaTime;
+            if (TimeLeftInSeconds <= 0 && !_timeUpFired)
+            {
+                // Start Time's up sequence
+                TimeUp.Invoke(this, new EventArgs());
+                _timeUpFired = true;
+            }
         }
     }
 }

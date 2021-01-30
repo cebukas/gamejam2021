@@ -7,6 +7,7 @@ using UnityEngine.Events;
 public class PlayerManager : MonoBehaviour
 {
     public GameObject Hero;
+
     // Start is called before the first frame update
     void Start()
     {
