@@ -86,4 +86,22 @@ public class CharacterMovement : MonoBehaviour
             _interactableGO = null;
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Interactable"))
+        {
+            _interactionAvailable = true;
+            _interactableGO = collision.gameObject;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Interactable"))
+        {
+            _interactionAvailable = false;
+            _interactableGO = null;
+        }
+    }
 }
