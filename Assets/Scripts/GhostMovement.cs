@@ -5,7 +5,16 @@
      public Transform target;
      public float speed;
      public float lifeTime;
- 
+
+    private Vector3 position;
+    private float _lifeTime;
+
+    void Start()
+    {
+        position = transform.position;
+        _lifeTime = lifeTime;
+    }
+
      void FixedUpdate(){
         transform.LookAt(target.position);
         transform.Rotate(new Vector3(0, -90, 0), Space.Self);
@@ -14,11 +23,11 @@
             transform.Translate(new Vector3(speed * Time.deltaTime, 0, 0) );
         }
 
-        lifeTime -= Time.deltaTime;
-        if (lifeTime <= 0){
-            Destroy(this.gameObject);
+        _lifeTime -= Time.deltaTime;
+        if (_lifeTime <= 0){
+            _lifeTime = lifeTime;
+            transform.position = position;
+            gameObject.SetActive(false);
         }
-
     }
- 
 }

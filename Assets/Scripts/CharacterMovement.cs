@@ -115,6 +115,11 @@ public class CharacterMovement : MonoBehaviour
         {
             collision.gameObject.GetComponent<IInteractable>().Interact();
         }
+
+        if (collision.gameObject.CompareTag("Ghost"))
+        {
+            GetComponent<Health>().DoDamage();
+        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
