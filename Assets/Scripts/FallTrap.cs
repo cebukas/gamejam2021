@@ -13,7 +13,6 @@ public class FallTrap : MonoBehaviour, IInteractable
     {
         if(!_trapFired)
         {
-            Debug.Log("Sadkek u ded");
             PlayerInTrap.Invoke(this, new EventArgs());
         }
     }
