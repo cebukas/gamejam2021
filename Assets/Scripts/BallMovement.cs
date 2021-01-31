@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class BallMovement : MonoBehaviour, IInteractable
+public class BallMovement : MonoBehaviour, IInteractable, IControllable
 {
     public Transform target;
     public float speed;
@@ -15,15 +15,24 @@ public class BallMovement : MonoBehaviour, IInteractable
 
     public bool Rolling;
 
+    private bool _startRolling;
+
     public void Start()
     {
-        Rolling = true;
+        _startRolling = false;
+        position = transform.position;
+    }
+
+    public void Control()
+    {
         position = target.position;
+        Rolling = true;
+        _startRolling = true;
     }
 
     private void Update()
     {
-        if (speed > 0.0f)
+        if (speed > 0.0f && _startRolling)
         {
             BallAnimator.SetBool("Roll", true);
             Rolling = true;
@@ -50,7 +59,7 @@ public class BallMovement : MonoBehaviour, IInteractable
             transform.Translate(new Vector3(speed * Time.deltaTime, 0, 0));
         }
 
-        if (speed >= 0.0f)
+        if (speed >= 0.0f && _startRolling)
             speed -= Time.deltaTime;
     }
 
