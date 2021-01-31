@@ -11,6 +11,7 @@ public class Health : MonoBehaviour
     public static event EventHandler DeathFromDamage;
 
     public void DoDamage(){
+         FindObjectOfType<AudioManager>().Play("Damage");
         health--;
         if(health == 0){
             Debug.Log("playing dope - die mf die ");

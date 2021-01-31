@@ -17,6 +17,7 @@ public class Teleport : MonoBehaviour
         if (Vector3.Distance(player.GetComponent<Transform>().position, trigger.position) <= 1f){
             player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
             StartCoroutine("FadeIn");
+             FindObjectOfType<AudioManager>().Play("Teleport");
             player.GetComponent<Transform>().position = destination.position;
         }
     }
