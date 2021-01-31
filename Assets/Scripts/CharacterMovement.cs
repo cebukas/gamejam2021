@@ -41,6 +41,13 @@ public class CharacterMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if(!GetComponent<AudioSource>().isPlaying){
+                GetComponent<AudioSource>().Play();
+        }
+        if(movement.x == 0 && movement.y == 0){
+               GetComponent<AudioSource>().Stop();
+        }
+
         if (!_frozenMovement)
         {
             _rigidbody.velocity = new Vector2(movement.x * Speed, movement.y * Speed);
