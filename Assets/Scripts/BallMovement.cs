@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class BallMovement : MonoBehaviour, IInteractable
+public class BallMovement : MonoBehaviour, IInteractable, IControllable
 {
     public Transform target;
     public float speed;
@@ -19,6 +19,9 @@ public class BallMovement : MonoBehaviour, IInteractable
     {
         Rolling = true;
         position = target.position;
+    }
+    public void Control(){
+        
     }
 
     private void Update()
