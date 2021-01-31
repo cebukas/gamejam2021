@@ -153,7 +153,7 @@ public class CharacterMovement : MonoBehaviour
             _interactableGO = null;
         }
     }
-
+    
     private void setAnimatorConditions(bool runUp, bool runRight, bool runDown, bool runLeft)
     {
         animator.SetBool("RunRight", runRight);
