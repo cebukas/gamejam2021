@@ -86,6 +86,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 793fb6a78f2ad47d59c5710f432ceb0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speedInDegrees: 40
 --- !u!1 &7659347988158447863
 GameObject:
   m_ObjectHideFlags: 0
@@ -205,8 +206,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  speed: 4
-  lifeTime: 8
+  speed: 5
+  lifeTime: 10
 --- !u!58 &3779961367367550731
 CircleCollider2D:
   m_ObjectHideFlags: 0
