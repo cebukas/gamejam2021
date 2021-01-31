@@ -66,24 +66,28 @@ public class CharacterMovement : MonoBehaviour
 
         speedXPositive = speedX;
         speedYPositive = speedY;
-        
-        if(speedX < 0)
-            speedXPositive = speedX * - 1;
-        if(speedY < 0)
-            speedYPositive = speedY * - 1;
+
+        if (speedX < 0)
+            speedXPositive = speedX * -1;
+        if (speedY < 0)
+            speedYPositive = speedY * -1;
 
         setAnimatorConditions(false, false, false, false);
 
-        if(speedX <= -0.01f && speedX * (-1f) >= speedYPositive){
+        if (speedX <= -0.01f && speedX * (-1f) >= speedYPositive)
+        {
             setAnimatorConditions(false, false, false, true);
         }
-        if(speedX >= 0.01f && speedX >= speedYPositive){
+        if (speedX >= 0.01f && speedX >= speedYPositive)
+        {
             setAnimatorConditions(false, true, false, false);
         }
-        if(speedY >= 0.01f && speedY >= speedXPositive){
+        if (speedY >= 0.01f && speedY >= speedXPositive)
+        {
             setAnimatorConditions(true, false, false, false);
         }
-        if(speedY <= -0.01f && speedY * (-1f) >= speedXPositive){
+        if (speedY <= -0.01f && speedY * (-1f) >= speedXPositive)
+        {
             setAnimatorConditions(true, false, true, false);
         }
     }
@@ -110,6 +114,11 @@ public class CharacterMovement : MonoBehaviour
             IngameMenu.NotificationText = $"Press {InteractButton.ToString()}";
             _interactableGO = collision.gameObject;
         }
+
+        if (collision.gameObject.CompareTag("Trap"))
+        {
+            collision.gameObject.GetComponent<IInteractable>().Interact();
+        }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
@@ -131,7 +140,7 @@ public class CharacterMovement : MonoBehaviour
             _interactableGO = collision.gameObject;
         }
 
-        if(collision.gameObject.CompareTag("Trap"))
+        if (collision.gameObject.CompareTag("Trap"))
         {
             collision.gameObject.GetComponent<IInteractable>().Interact();
         }
@@ -146,7 +155,8 @@ public class CharacterMovement : MonoBehaviour
             _interactableGO = null;
         }
     }
-        private void setAnimatorConditions(bool runUp, bool runRight, bool runDown, bool runLeft){
+    private void setAnimatorConditions(bool runUp, bool runRight, bool runDown, bool runLeft)
+    {
         animator.SetBool("RunRight", runRight);
         animator.SetBool("RunLeft", runLeft);
         animator.SetBool("RunUp", runUp);
