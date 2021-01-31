@@ -42,6 +42,18 @@ public class IngameMenu : MonoBehaviour
 
         GameManager.TimeUp += GameManager_TimeUp;
         Health.DeathFromDamage += Health_DeathFromDamage;
+        FallTrap.PlayerInTrap += FallTrap_PlayerInTrap;
+        BallMovement.PlayerHitBall += BallMovement_PlayerHitBall;
+    }
+
+    private void BallMovement_PlayerHitBall(object sender, EventArgs e)
+    {
+        EnableRestartButton();
+    }
+
+    private void FallTrap_PlayerInTrap(object sender, EventArgs e)
+    {
+        EnableRestartButton();
     }
 
     private void Health_DeathFromDamage(object sender, EventArgs e)
