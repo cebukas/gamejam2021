@@ -30,14 +30,14 @@ public class Door : MonoBehaviour, IControllable
         {
             foreach (var s in GetComponentsInChildren<SpriteRenderer>())
                 s.enabled = false;
-            foreach (var c in GetComponentsInChildren<Collider2D>())
+            foreach (var c in GetComponentsInChildren<BoxCollider2D>())
                 c.isTrigger = true;
         }
         else
         {
             foreach (var s in GetComponentsInChildren<SpriteRenderer>())
                 s.enabled = true;
-            foreach (var c in GetComponentsInChildren<Collider2D>())
+            foreach (var c in GetComponentsInChildren<BoxCollider2D>())
                 c.isTrigger = false;
         }
     }
