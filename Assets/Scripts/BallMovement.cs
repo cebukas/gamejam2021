@@ -43,7 +43,7 @@ public class BallMovement : MonoBehaviour, IInteractable, IControllable
             Rolling = false;
         }
 
-        if (speed <= 0.0f)
+        if (speed <= 0.0f || (transform.position == position && _startRolling))
         {
             Destroy(Stone);
         }
