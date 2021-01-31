@@ -44,7 +44,7 @@ public class Torch : MonoBehaviour, IInteractable
         }
         else
         {
-            _lightSource.SetActive(true);
+            _lightSource.SetActive(false);
             GetComponent<SpriteRenderer>().sprite = _torchUnlit;
             _sMask.SetActive(false);
         }
