@@ -11,8 +11,11 @@ public class GameManager : MonoBehaviour
 
     private bool _timeUpFired = false;
 
+    public static bool Win { get; internal set; }
+
     private void Start()
     {
+        Win = false;
         GameOver = false;
         Time.timeScale = 1.0f;
         TimeLeftInSeconds = 900f;
