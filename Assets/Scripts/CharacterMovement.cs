@@ -15,11 +15,14 @@ public class CharacterMovement : MonoBehaviour
     private bool _frozenMovement = false;
     private bool _interactionAvailable = false;
     private GameObject _interactableGO = null;
+    private Rigidbody2D _rigidbody;
+
     public Animator animator;
     private float speedX;
     private float speedY;
     private float speedXPositive;
     private float speedYPositive;
+
     void Update()
     {
         // Read Player input
@@ -28,7 +31,6 @@ public class CharacterMovement : MonoBehaviour
 
         if (_interactionAvailable)
         {
-
             if (Input.GetKeyDown(InteractButton))
             {
                 InvokeInteraction();
@@ -39,6 +41,7 @@ public class CharacterMovement : MonoBehaviour
     private void Start()
     {
         _frozenMovement = false;
+        _rigidbody = GetComponent<Rigidbody2D>();
     }
 
 
@@ -53,7 +56,7 @@ public class CharacterMovement : MonoBehaviour
 
         if (!_frozenMovement)
         {
-            GetComponent<Rigidbody2D>().velocity = new Vector2(_inputX * MovementSpeed, _inputY * MovementSpeed);
+            _rigidbody.velocity = new Vector2(_inputX * MovementSpeed, _inputY * MovementSpeed);
         }
         else
         {
@@ -61,29 +64,33 @@ public class CharacterMovement : MonoBehaviour
             _inputY = 0f;
             GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
         }
-        speedX = GetComponent<Rigidbody2D>().velocity.x;
-        speedY = GetComponent<Rigidbody2D>().velocity.y;
+        speedX = _rigidbody.velocity.x;
+        speedY = _rigidbody.velocity.y;
 
         speedXPositive = speedX;
         speedYPositive = speedY;
-        
-        if(speedX < 0)
-            speedXPositive = speedX * - 1;
-        if(speedY < 0)
-            speedYPositive = speedY * - 1;
+
+        if (speedX < 0)
+            speedXPositive = speedX * -1;
+        if (speedY < 0)
+            speedYPositive = speedY * -1;
 
         setAnimatorConditions(false, false, false, false);
 
-        if(speedX <= -0.01f && speedX * (-1f) >= speedYPositive){
+        if (speedX <= -0.01f && speedX * (-1f) >= speedYPositive)
+        {
             setAnimatorConditions(false, false, false, true);
         }
-        if(speedX >= 0.01f && speedX >= speedYPositive){
+        if (speedX >= 0.01f && speedX >= speedYPositive)
+        {
             setAnimatorConditions(false, true, false, false);
         }
-        if(speedY >= 0.01f && speedY >= speedXPositive){
+        if (speedY >= 0.01f && speedY >= speedXPositive)
+        {
             setAnimatorConditions(true, false, false, false);
         }
-        if(speedY <= -0.01f && speedY * (-1f) >= speedXPositive){
+        if (speedY <= -0.01f && speedY * (-1f) >= speedXPositive)
+        {
             setAnimatorConditions(true, false, true, false);
         }
     }
@@ -131,7 +138,7 @@ public class CharacterMovement : MonoBehaviour
             _interactableGO = collision.gameObject;
         }
 
-        if(collision.gameObject.CompareTag("Trap"))
+        if (collision.gameObject.CompareTag("Trap"))
         {
             collision.gameObject.GetComponent<IInteractable>().Interact();
         }
@@ -146,7 +153,9 @@ public class CharacterMovement : MonoBehaviour
             _interactableGO = null;
         }
     }
-        private void setAnimatorConditions(bool runUp, bool runRight, bool runDown, bool runLeft){
+
+    private void setAnimatorConditions(bool runUp, bool runRight, bool runDown, bool runLeft)
+    {
         animator.SetBool("RunRight", runRight);
         animator.SetBool("RunLeft", runLeft);
         animator.SetBool("RunUp", runUp);

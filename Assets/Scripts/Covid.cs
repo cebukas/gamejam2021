@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Covid : MonoBehaviour
 {
-
     public float firstOccurenceTime;
     public float covidDurationTime;
     public float covidIntervalTime;
