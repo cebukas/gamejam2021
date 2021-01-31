@@ -332,8 +332,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36156adafc9a74b45952d133a9377df8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DiagonalMovementSpeedCoeff: 0.7
-  MovementSpeed: 10
+  Speed: 8
   InteractButton: 101
   animator: {fileID: 7617337961803576811}
 --- !u!114 &7617337961803576813
