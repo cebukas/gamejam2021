@@ -11,12 +11,15 @@ public class Health : MonoBehaviour
     public static event EventHandler DeathFromDamage;
 
     public void DoDamage(){
-         FindObjectOfType<AudioManager>().Play("Damage");
-        health--;
-        if(health == 0){
-            Debug.Log("playing dope - die mf die ");
-            DeathFromDamage.Invoke(this, new EventArgs());
+        if(health > 0) {
+            FindObjectOfType<AudioManager>().Play("Damage");
+            health--;
+            if(health == 0){
+                Debug.Log("playing dope - die mf die ");
+                DeathFromDamage.Invoke(this, new EventArgs());
+            }
         }
+        
     }
 
     public void Heal(){
