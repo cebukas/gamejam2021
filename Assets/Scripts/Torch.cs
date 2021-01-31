@@ -26,6 +26,7 @@ public class Torch : MonoBehaviour, IInteractable
         _torchIsLit = !_torchIsLit;
         if (_torchIsLit)
         {
+            FindObjectOfType<AudioManager>().Play("Torch");
             _lightSource.SetActive(true);
             GetComponent<SpriteRenderer>().sprite = _torchLit;
         }

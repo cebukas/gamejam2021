@@ -47,6 +47,12 @@ public class CharacterMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if(!GetComponent<AudioSource>().isPlaying){
+                GetComponent<AudioSource>().Play();
+        }
+        if(_inputX == 0 && _inputY == 0){
+               GetComponent<AudioSource>().Stop();
+        }
         if (_inputX != 0 && _inputY != 0)
         {
             // Movement is diagonal

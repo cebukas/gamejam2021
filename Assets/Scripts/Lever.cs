@@ -17,6 +17,7 @@ public class Lever : MonoBehaviour, IInteractable
 
     public void Interact()
     {
+        FindObjectOfType<AudioManager>().Play("Button");
         SwitchState();
 
         if (ControlledGameObjects != null)

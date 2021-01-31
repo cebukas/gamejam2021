@@ -25,6 +25,7 @@ public class Door : MonoBehaviour, IControllable
 
     private void ChangeDoorState()
     {
+        FindObjectOfType<AudioManager>().Play("Door");
         if (Opened)
         {
             foreach (var s in GetComponentsInChildren<SpriteRenderer>())
