@@ -17,11 +17,13 @@ public class BallMovement : MonoBehaviour, IInteractable, IControllable
 
     public void Start()
     {
-        Rolling = true;
-        position = target.position;
+        position = transform.position;
     }
-    public void Control(){
-        
+
+    public void Control()
+    {
+        position = target.position;
+        Rolling = true;
     }
 
     private void Update()
