@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -80,6 +80,11 @@ public class CharacterMovement : MonoBehaviour
             _interactionAvailable = true;
             IngameMenu.NotificationText = $"Press {InteractButton.ToString()}";
             _interactableGO = collision.gameObject;
+        }
+
+        if (collision.gameObject.CompareTag("Trap"))
+        {
+            collision.gameObject.GetComponent<IInteractable>().Interact();
         }
     }
 

@@ -15,6 +15,12 @@ public class PlayerManager : MonoBehaviour
         GameManager.TimeUp += GameManager_TimeUp;
         Health.DeathFromDamage += Health_DeathFromDamage;
         FallTrap.PlayerInTrap += FallTrap_PlayerInTrap;
+        BallMovement.PlayerHitBall += BallMovement_PlayerHitBall;
+    }
+
+    private void BallMovement_PlayerHitBall(object sender, EventArgs e)
+    {
+        Death("You have died!");
     }
 
     private void FallTrap_PlayerInTrap(object sender, EventArgs e)
