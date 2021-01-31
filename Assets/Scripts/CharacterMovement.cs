@@ -30,6 +30,11 @@ public class CharacterMovement : MonoBehaviour
                 InvokeInteraction();
             }
         }
+        
+        if(GameManager.Win)
+        {
+            Freeze();
+        }
     }
 
     private void Start()
@@ -37,7 +42,6 @@ public class CharacterMovement : MonoBehaviour
         _frozenMovement = false;
         _rigidbody = GetComponent<Rigidbody2D>();
     }
-
 
     private void FixedUpdate()
     {

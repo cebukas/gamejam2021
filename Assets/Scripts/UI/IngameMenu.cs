@@ -71,8 +71,11 @@ public class IngameMenu : MonoBehaviour
 
     void Update()
     {
-        _liveCountText.text = $"Lives: {_hero.GetComponent<Health>().GetHealth()}";
-        _timeText.text = $"Time left: {Math.Round(_gameManager.TimeLeftInSeconds).ToString()}";
-        _notificationTextUI.text = NotificationText;
+        if (!GameManager.Win)
+        {
+            _liveCountText.text = $"Lives: {_hero.GetComponent<Health>().GetHealth()}";
+            _timeText.text = $"Time left: {Math.Round(_gameManager.TimeLeftInSeconds).ToString()}";
+            _notificationTextUI.text = NotificationText;
+        }
     }
 }
