@@ -212,7 +212,7 @@ GameObject:
   - component: {fileID: 410904674}
   - component: {fileID: 410904673}
   m_Layer: 5
-  m_Name: Settings
+  m_Name: QuickDescriptionMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -439,8 +439,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -78.61566, y: -288}
-  m_SizeDelta: {x: 638, y: 80}
+  m_AnchoredPosition: {x: 49.732117, y: -484.01193}
+  m_SizeDelta: {x: 1275.7089, y: 472.02386}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &725585750
 MonoBehaviour:
@@ -509,7 +509,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -680,7 +680,12 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: SOME SETTING
+  m_Text: 'YOU''RE LOST IN A LABYRINTH, AND YOU HAVE TO FIND AN EXIT! BEWARE, YOU
+    ONLY HAVE 900 SECONDS!
+
+
+    USE WASD OR ARROW KEYS FOR MOVEMENT. THERE ARE INTERACTABLE
+    OBJECTS, USE ''E'' TO INTERACT WITH THEM.'
 --- !u!222 &1002588544
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -700,6 +705,7 @@ GameObject:
   - component: {fileID: 1174874354}
   - component: {fileID: 1174874353}
   - component: {fileID: 1174874352}
+  - component: {fileID: 1174874355}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -772,6 +778,37 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1174874355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1174874351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
 --- !u!1 &1191753669
 GameObject:
   m_ObjectHideFlags: 0
@@ -806,7 +843,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -78.61566, y: -99}
+  m_AnchoredPosition: {x: 49.732117, y: -99}
   m_SizeDelta: {x: 637, y: 198}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1191753671
@@ -841,7 +878,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: SETTINGS
+  m_Text: HOW TO PLAY
 --- !u!222 &1191753672
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1484,7 +1521,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -78.61566, y: -418}
+  m_AnchoredPosition: {x: 49.732117, y: -810.02386}
   m_SizeDelta: {x: 638, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2026881404
@@ -1777,7 +1814,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: SETTINGS
+  m_Text: HOW TO PLAY
 --- !u!222 &2140464842
 CanvasRenderer:
   m_ObjectHideFlags: 0
