@@ -45,8 +45,72 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds:
   - name: Lose
+    clip: {fileID: 8300000, guid: f395c52b2fc1e034a94b61afda9def25, type: 3}
+    volume: 0.803
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+    isPlaying: 0
+  - name: Background
+    clip: {fileID: 8300000, guid: b5792a8d91e73a84290ef13bc259bcc1, type: 3}
+    volume: 0.5
+    pitch: 1
+    source: {fileID: 0}
+    loop: 1
+    isPlaying: 0
+  - name: Teleport
+    clip: {fileID: 8300000, guid: 76f551c3d10f018469e4728e7fa65770, type: 3}
+    volume: 0.803
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+    isPlaying: 0
+  - name: Damage
+    clip: {fileID: 8300000, guid: 2f150c88c6aebe646990d70da6b71cae, type: 3}
+    volume: 0.641
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+    isPlaying: 0
+  - name: Button
+    clip: {fileID: 8300000, guid: 3228252359f82a3439d7d7fd1d4e2675, type: 3}
+    volume: 0.803
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+    isPlaying: 0
+  - name: Torch
+    clip: {fileID: 8300000, guid: 4651d105c1f19374097ec63142586cce, type: 3}
+    volume: 0.803
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+    isPlaying: 0
+  - name: Door
+    clip: {fileID: 8300000, guid: ddc4bfe5900aebc4d92f3e3e716ebc72, type: 3}
+    volume: 0.803
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+    isPlaying: 0
+  - name: Lose
     clip: {fileID: 8300000, guid: 173e6c07e4da6a84095ca4802c15d643, type: 3}
     volume: 0.803
     pitch: 1
     source: {fileID: 0}
     loop: 0
+    isPlaying: 0
+  - name: Lose
+    clip: {fileID: 8300000, guid: 173e6c07e4da6a84095ca4802c15d643, type: 3}
+    volume: 0.803
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+    isPlaying: 0
+  - name: Lose
+    clip: {fileID: 8300000, guid: 173e6c07e4da6a84095ca4802c15d643, type: 3}
+    volume: 0.803
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+    isPlaying: 0
