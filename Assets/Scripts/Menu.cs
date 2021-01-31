@@ -14,6 +14,9 @@ public class Menu : MonoBehaviour
 
     IEnumerator LoadYourAsyncScene()
     {
+        //Hardcoding scene name since we have on one..
+        sceneNameToLoad = "Level dublicate"; // why b?
+
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneNameToLoad);
 
         while (!asyncLoad.isDone)
