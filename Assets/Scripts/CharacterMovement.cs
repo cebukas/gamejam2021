@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,11 +15,14 @@ public class CharacterMovement : MonoBehaviour
     private bool _frozenMovement = false;
     private bool _interactionAvailable = false;
     private GameObject _interactableGO = null;
+    private Rigidbody2D _rigidbody;
+
     public Animator animator;
     private float speedX;
     private float speedY;
     private float speedXPositive;
     private float speedYPositive;
+
     void Update()
     {
         // Read Player input
@@ -28,7 +31,6 @@ public class CharacterMovement : MonoBehaviour
 
         if (_interactionAvailable)
         {
-
             if (Input.GetKeyDown(InteractButton))
             {
                 InvokeInteraction();
@@ -39,11 +41,18 @@ public class CharacterMovement : MonoBehaviour
     private void Start()
     {
         _frozenMovement = false;
+        _rigidbody = GetComponent<Rigidbody2D>();
     }
 
 
     private void FixedUpdate()
     {
+        if(!GetComponent<AudioSource>().isPlaying){
+                GetComponent<AudioSource>().Play();
+        }
+        if(_inputX == 0 && _inputY == 0){
+               GetComponent<AudioSource>().Stop();
+        }
         if (_inputX != 0 && _inputY != 0)
         {
             // Movement is diagonal
@@ -53,7 +62,7 @@ public class CharacterMovement : MonoBehaviour
 
         if (!_frozenMovement)
         {
-            GetComponent<Rigidbody2D>().velocity = new Vector2(_inputX * MovementSpeed, _inputY * MovementSpeed);
+            _rigidbody.velocity = new Vector2(_inputX * MovementSpeed, _inputY * MovementSpeed);
         }
         else
         {
@@ -61,8 +70,8 @@ public class CharacterMovement : MonoBehaviour
             _inputY = 0f;
             GetComponent<Rigidbody2D>().velocity = new Vector2(0f, 0f);
         }
-        speedX = GetComponent<Rigidbody2D>().velocity.x;
-        speedY = GetComponent<Rigidbody2D>().velocity.y;
+        speedX = _rigidbody.velocity.x;
+        speedY = _rigidbody.velocity.y;
 
         speedXPositive = speedX;
         speedYPositive = speedY;
@@ -155,6 +164,7 @@ public class CharacterMovement : MonoBehaviour
             _interactableGO = null;
         }
     }
+
     private void setAnimatorConditions(bool runUp, bool runRight, bool runDown, bool runLeft)
     {
         animator.SetBool("RunRight", runRight);

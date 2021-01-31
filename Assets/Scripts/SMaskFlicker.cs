@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[Obsolete]
 public class SMaskFlicker : MonoBehaviour
 {
     [Range(0.05f, 0.2f)]

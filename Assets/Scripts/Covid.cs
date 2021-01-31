@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class Covid : MonoBehaviour
 {
-
     public float firstOccurenceTime;
     public float covidDurationTime;
     public float covidIntervalTime;
     public bool isLooping;
     public ParticleSystem covidParticle;
+
     public float cooldown;
+    public GameObject player;
     private float timer;
     void Start()
     {
@@ -32,7 +33,10 @@ public class Covid : MonoBehaviour
         timer -= Time.deltaTime;
     }
     public void emitCovid(){
-        covidParticle.enableEmission = true;
+          if (Vector3.Distance(player.GetComponent<Transform>().position, this.transform.position) <= 5f){
+                GetComponent<AudioSource>().Play();
+          }
+         covidParticle.enableEmission = true;
     }
     public void stopCovid(){
          covidParticle.enableEmission = false;

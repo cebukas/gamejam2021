@@ -5,15 +5,6 @@ using UnityEngine;
 
 public class Torch : MonoBehaviour, IInteractable
 {
-    [Range(0.05f, 0.2f)]
-    public float FlickTime;
-
-    [Range(0.05f, 0.2f)]
-    public float AddSize;
-
-    private float _timer = 0;
-    private bool _flicked = true;
-
     [SerializeField]
     private Sprite _torchLit;
 
@@ -25,9 +16,6 @@ public class Torch : MonoBehaviour, IInteractable
     [SerializeField]
     private GameObject _lightSource;
     
-    [SerializeField]
-    private GameObject _sMask;
-
     public void Interact()
     {
         SwitchState();
@@ -38,15 +26,14 @@ public class Torch : MonoBehaviour, IInteractable
         _torchIsLit = !_torchIsLit;
         if (_torchIsLit)
         {
-            GetComponent<SpriteRenderer>().sprite = _torchLit;
+            FindObjectOfType<AudioManager>().Play("Torch");
             _lightSource.SetActive(true);
-            _sMask.SetActive(true);
+            GetComponent<SpriteRenderer>().sprite = _torchLit;
         }
         else
         {
             _lightSource.SetActive(false);
             GetComponent<SpriteRenderer>().sprite = _torchUnlit;
-            _sMask.SetActive(false);
         }
     }
 
@@ -55,6 +42,5 @@ public class Torch : MonoBehaviour, IInteractable
         _lightSource.SetActive(false);
         GetComponent<SpriteRenderer>().sprite = _torchUnlit;
         _torchIsLit = false;
-        _sMask.SetActive(false);
     }
 }

@@ -18,11 +18,20 @@ public class AudioManager : MonoBehaviour
             s.source.pitch = s.pitch;
             s.source.loop = s.loop;
         }
+
+    }
+    void Start(){
+
+        FindObjectOfType<AudioManager>().Play("Background");
     }
 
     public void Play(string name)
     {
         Sound s = Array.Find(sounds, sounds => sounds.name == name);
         s.source.Play();
+    }
+    public void Stop(string name){
+        Sound s = Array.Find(sounds, sounds => sounds.name == name);
+        s.source.Stop(); 
     }
 }
