@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Experimental.Rendering.Universal;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -40,6 +41,8 @@ public class PlayerManager : MonoBehaviour
 
     private void Death(string message)
     {
+        Hero.transform.GetChild(1).gameObject.GetComponent<Light2D>().enabled = false;
+        Hero.transform.GetChild(2).gameObject.GetComponent<Light2D>().enabled = false;
         GameManager.GameOver = true;
         IngameMenu.NotificationText = message;
         Hero.GetComponent<Animator>().SetTrigger("Death");
