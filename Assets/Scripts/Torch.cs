@@ -12,6 +12,9 @@ public class Torch : MonoBehaviour, IInteractable
     private Sprite _torchUnlit;
 
     private bool _torchIsLit = false;
+
+    [SerializeField]
+    private GameObject _lightSource;
     
     public void Interact()
     {
@@ -27,12 +30,14 @@ public class Torch : MonoBehaviour, IInteractable
         }
         else
         {
+            _lightSource.SetActive(false);
             GetComponent<SpriteRenderer>().sprite = _torchUnlit;
         }
     }
 
     public void Start()
     {
+        _lightSource.SetActive(false);
         GetComponent<SpriteRenderer>().sprite = _torchUnlit;
         _torchIsLit = false;
     }

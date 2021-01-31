@@ -11,13 +11,13 @@ public class IngameMenu : MonoBehaviour
     public static string NotificationText;
 
     [SerializeField]
-    private TextMeshProUGUI _timeText;
+    private Text _timeText;
 
     [SerializeField]
-    private TextMeshProUGUI _liveCountText;
+    private Text _liveCountText;
 
     [SerializeField]
-    private TextMeshProUGUI _notificationTextUI;
+    private Text _notificationTextUI;
 
     [SerializeField]
     private Button _restartButton;
@@ -36,7 +36,7 @@ public class IngameMenu : MonoBehaviour
     private void Start()
     {
         NotificationText = "";
-        _notificationTextUI.SetText("");
+        _notificationTextUI.text = "";
         _restartButton.onClick.AddListener(RestartLevel);
         _restartButton.gameObject.SetActive(false);
 
@@ -71,8 +71,8 @@ public class IngameMenu : MonoBehaviour
 
     void Update()
     {
-        _liveCountText.SetText($"Lives: {_hero.GetComponent<Health>().GetHealth()}");
-        _timeText.SetText($"Time left: {Math.Round(_gameManager.TimeLeftInSeconds).ToString()}");
-        _notificationTextUI.SetText(NotificationText);
+        _liveCountText.text = $"Lives: {_hero.GetComponent<Health>().GetHealth()}";
+        _timeText.text = $"Time left: {Math.Round(_gameManager.TimeLeftInSeconds).ToString()}";
+        _notificationTextUI.text = NotificationText;
     }
 }
