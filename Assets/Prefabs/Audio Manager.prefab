@@ -1,0 +1,116 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8718829418873645033
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8718829418873645039}
+  - component: {fileID: 8718829418873645032}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8718829418873645039
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8718829418873645033}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.5514603, y: 0.11200586, z: -22.203125}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8718829418873645032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8718829418873645033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 276ea7fe61bf2a144993c158f0da42ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: Lose
+    clip: {fileID: 8300000, guid: f395c52b2fc1e034a94b61afda9def25, type: 3}
+    volume: 0.803
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+    isPlaying: 0
+  - name: Background
+    clip: {fileID: 8300000, guid: b5792a8d91e73a84290ef13bc259bcc1, type: 3}
+    volume: 0.5
+    pitch: 1
+    source: {fileID: 0}
+    loop: 1
+    isPlaying: 0
+  - name: Teleport
+    clip: {fileID: 8300000, guid: 76f551c3d10f018469e4728e7fa65770, type: 3}
+    volume: 0.803
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+    isPlaying: 0
+  - name: Damage
+    clip: {fileID: 8300000, guid: 2f150c88c6aebe646990d70da6b71cae, type: 3}
+    volume: 0.641
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+    isPlaying: 0
+  - name: Button
+    clip: {fileID: 8300000, guid: 3228252359f82a3439d7d7fd1d4e2675, type: 3}
+    volume: 0.803
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+    isPlaying: 0
+  - name: Torch
+    clip: {fileID: 8300000, guid: 4651d105c1f19374097ec63142586cce, type: 3}
+    volume: 0.803
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+    isPlaying: 0
+  - name: Door
+    clip: {fileID: 8300000, guid: ddc4bfe5900aebc4d92f3e3e716ebc72, type: 3}
+    volume: 0.803
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+    isPlaying: 0
+  - name: Lose
+    clip: {fileID: 8300000, guid: 173e6c07e4da6a84095ca4802c15d643, type: 3}
+    volume: 0.803
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+    isPlaying: 0
+  - name: Lose
+    clip: {fileID: 8300000, guid: 173e6c07e4da6a84095ca4802c15d643, type: 3}
+    volume: 0.803
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+    isPlaying: 0
+  - name: Lose
+    clip: {fileID: 8300000, guid: 173e6c07e4da6a84095ca4802c15d643, type: 3}
+    volume: 0.803
+    pitch: 1
+    source: {fileID: 0}
+    loop: 0
+    isPlaying: 0

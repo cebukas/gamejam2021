@@ -15,8 +15,9 @@ public class Covid : MonoBehaviour
     private float timer;
     void Start()
     {
-        covidParticle.emissionRate = 50;
-        covidParticle.enableEmission = false;
+        var emission = covidParticle.emission;
+        emission.rateOverTime = 50;
+        emission.enabled = false;
         timer = cooldown;
 
         if(isLooping){
@@ -29,20 +30,27 @@ public class Covid : MonoBehaviour
         }
 
     }
-    void FixedUpdate(){
+    void FixedUpdate()
+    {
         timer -= Time.deltaTime;
     }
-    public void emitCovid(){
-          if (Vector3.Distance(player.GetComponent<Transform>().position, this.transform.position) <= 5f){
-                GetComponent<AudioSource>().Play();
-          }
-         covidParticle.enableEmission = true;
-    }
-    public void stopCovid(){
-         covidParticle.enableEmission = false;
+
+    public void emitCovid()
+    {
+        if (Vector3.Distance(player.GetComponent<Transform>().position, this.transform.position) <= 5f){
+            GetComponent<AudioSource>().Play();
+        }
+        var emission = covidParticle.emission;
+        emission.enabled = true;
     }
 
-       void OnParticleCollision(GameObject other)
+    public void stopCovid()
+    {
+        var emission = covidParticle.emission;
+        emission.enabled = false;
+    }
+
+    void OnParticleCollision(GameObject other)
     {
         if(timer <= 0){
             if(other.tag == "Player"){
