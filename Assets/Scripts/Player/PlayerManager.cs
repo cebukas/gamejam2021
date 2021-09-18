@@ -5,9 +5,9 @@ using UnityEngine.Experimental.Rendering.Universal;
 public class PlayerManager : MonoBehaviour
 {
     [SerializeField]
-    private GameObject Hero;
+    private GameObject hero;
 
-    void Start()
+    private void Start()
     {
         Time.timeScale = 1.0f;
         GameManager.TimeUp += OnTimeUp;
@@ -18,7 +18,7 @@ public class PlayerManager : MonoBehaviour
 
     private void OnPlayerDeath(object sender, EventArgs e)
     {
-        Death("You have died");
+        Death("You have died"); //Hardcoded string bad for more languages
     }
 
     private void OnTimeUp(object sender, EventArgs e)
@@ -28,13 +28,12 @@ public class PlayerManager : MonoBehaviour
     
     private void Death(string message)
     {
-        Hero.transform.GetChild(1).gameObject.GetComponent<Light2D>().enabled = false;
-        Hero.transform.GetChild(2).gameObject.GetComponent<Light2D>().enabled = false;
+        hero.transform.GetChild(1).gameObject.GetComponent<Light2D>().enabled = false;
         GameManager.GameOver = true;
         IngameMenu.NotificationText = message;
-        Hero.GetComponent<Animator>().SetTrigger("Death"); // TODO (Lukas): String ids
+        hero.GetComponent<Animator>().SetTrigger("Death"); // TODO (Lukas): String ids
         FindObjectOfType<AudioManager>().Play("Lose");
-        Hero.GetComponent<CharacterMovement>().Freeze();
+        hero.GetComponent<CharacterMovement>().Freeze();
         GameManager.TimeCountDown = false;
     }
 }

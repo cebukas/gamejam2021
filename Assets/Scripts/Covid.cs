@@ -19,7 +19,7 @@ public class Covid : MonoBehaviour
     
     private float _timer;
     
-    void Start()
+    private void Start()
     {
         var emission = covidParticle.emission;
         emission.rateOverTime = 50;
@@ -36,14 +36,15 @@ public class Covid : MonoBehaviour
         }
 
     }
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         _timer -= Time.deltaTime;
     }
 
     public void EmitCovid()
     {
-        if (Vector3.Distance(player.GetComponent<Transform>().position, this.transform.position) <= 5f){
+        if((player.GetComponent<Transform>().position - transform.position).sqrMagnitude < 25f) // avoids sqrt operation that's why 5f * 5f
+        {
             GetComponent<AudioSource>().Play();
         }
         var emission = covidParticle.emission;

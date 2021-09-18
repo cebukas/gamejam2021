@@ -16,9 +16,9 @@ public class Menu : MonoBehaviour
         StartCoroutine(LoadYourAsyncScene());
     }
 
-    IEnumerator LoadYourAsyncScene()
+    private IEnumerator LoadYourAsyncScene()
     {
-        //Hardcoding scene name since we have on one..
+        //Hardcoding scene name since we have only one..
         sceneNameToLoad = "Level OLD"; 
 
         var asyncLoad = SceneManager.LoadSceneAsync(sceneNameToLoad);

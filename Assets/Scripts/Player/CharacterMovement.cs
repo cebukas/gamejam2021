@@ -5,9 +5,9 @@ using UnityEngine;
 public class CharacterMovement : MonoBehaviour
 {
     [SerializeField]
-    private float Speed = 10f;
+    private float speed = 10f;
     [SerializeField]
-    private KeyCode InteractButton = KeyCode.E;
+    private KeyCode interactButton = KeyCode.E;
     [SerializeField]
     private Animator animator;
 
@@ -34,7 +34,7 @@ public class CharacterMovement : MonoBehaviour
         animator.SetFloat("Speed", _movement.sqrMagnitude);
         if (_interactionAvailable)
         {
-            if (Input.GetKeyDown(InteractButton))
+            if (Input.GetKeyDown(interactButton))
             {
                 InvokeInteraction();
             }
@@ -57,7 +57,7 @@ public class CharacterMovement : MonoBehaviour
 
         if (!_frozenMovement)
         {
-            _rigidbody.velocity = new Vector2(_movement.x * Speed, _movement.y * Speed);
+            _rigidbody.velocity = new Vector2(_movement.x * speed, _movement.y * speed);
         } else
         {
             _movement.x = 0f;
@@ -83,7 +83,7 @@ public class CharacterMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("Interactable"))
         {
             _interactionAvailable = true;
-            IngameMenu.NotificationText = $"Press {InteractButton.ToString()}";
+            IngameMenu.NotificationText = $"Press {interactButton.ToString()}";
             _interactableGO = collision.gameObject;
         }
 
@@ -106,7 +106,7 @@ public class CharacterMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("Interactable"))
         {
             _interactionAvailable = true;
-            IngameMenu.NotificationText = $"Press {InteractButton.ToString()}";
+            IngameMenu.NotificationText = $"Press {interactButton.ToString()}";
             _interactableGO = collision.gameObject;
         }
 

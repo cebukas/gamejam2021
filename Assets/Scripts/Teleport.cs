@@ -10,29 +10,35 @@ public class Teleport : MonoBehaviour
     [SerializeField]
     private GameObject player;
     [SerializeField]
-    private bool FinalTeleport = false;
+    private bool finalTeleport = false;
 
     private SpriteRenderer _renderer;
    
-    void Start()
+    private void Start()
     {
         _renderer = player.GetComponent<SpriteRenderer>();
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
-        if (!(Vector3.Distance(player.GetComponent<Transform>().position, trigger.position) <= 1f)) return;
+        IsTeleporting();
+    }
+
+    private void IsTeleporting()
+    {
+        if (!((player.GetComponent<Transform>().position - trigger.position).sqrMagnitude <= 1f)) return;
         player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
         StartCoroutine("FadeIn");
         FindObjectOfType<AudioManager>().Play("Teleport");
         player.GetComponent<Transform>().position = destination.position;
 
-        if(FinalTeleport)
+        if(finalTeleport)
         {
             GameManager.Win = true;
         }
     }
-    IEnumerator FadeIn()
+
+    private IEnumerator FadeIn()
     {
         for (var f = 0.05f; f <= 1; f += 0.05f)
         {
@@ -45,7 +51,7 @@ public class Teleport : MonoBehaviour
         player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 
-    IEnumerator FadeOut()
+    private IEnumerator FadeOut()
     {
         for (var f = 1f; f >= 0.05f; f -= 0.05f)
         {

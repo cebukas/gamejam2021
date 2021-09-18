@@ -7,6 +7,7 @@ public class Health : MonoBehaviour
     
     [SerializeField]
     private int health;
+
     private float _covidDelay;
 
     public void DoDamage()
@@ -19,9 +20,12 @@ public class Health : MonoBehaviour
         DeathFromDamage?.Invoke(this, new EventArgs());
     }
 
-    public void Heal(){
+    public void Heal()
+    {
         if(health != 3)
+        {
             health++;
+        }
     }
 
     internal int GetHealth()

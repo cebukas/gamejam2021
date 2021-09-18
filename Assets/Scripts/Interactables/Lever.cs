@@ -1,26 +1,26 @@
 ﻿using UnityEngine;
 
 public class Lever : MonoBehaviour, IInteractable
-{
+{ 
+    [SerializeField]
+    private GameObject[] controlledGameObjects;
+
+    [SerializeField]
+    private Sprite leverDown;
+
+    [SerializeField]
+    private Sprite leverUp;
+
     private bool _leverEnabled = false;
-    
-    [SerializeField]
-    private GameObject[] ControlledGameObjects;
-
-    [SerializeField]
-    private Sprite _leverDown;
-
-    [SerializeField]
-    private Sprite _leverUp;
 
     public void Interact()
     {
         FindObjectOfType<AudioManager>().Play("Button");
         SwitchState();
 
-        if (ControlledGameObjects != null)
+        if (controlledGameObjects != null)
         {
-            foreach(var controlledObject in ControlledGameObjects)
+            foreach(var controlledObject in controlledGameObjects)
             {
                 controlledObject.GetComponent<IControllable>().Control();
             }
@@ -34,6 +34,6 @@ public class Lever : MonoBehaviour, IInteractable
     private void SwitchState()
     {
         _leverEnabled = !_leverEnabled;
-        GetComponent<SpriteRenderer>().sprite = _leverEnabled ? _leverDown : _leverUp;
+        GetComponent<SpriteRenderer>().sprite = _leverEnabled ? leverDown : leverUp;
     }
 }

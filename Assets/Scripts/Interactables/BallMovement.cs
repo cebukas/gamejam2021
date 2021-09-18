@@ -12,19 +12,18 @@ public class BallMovement : MonoBehaviour, IInteractable, IControllable
     private float speed;
     
     [SerializeField]
-    private GameObject Stone;
+    private GameObject stone;
 
     [SerializeField]
-    private Animator BallAnimator;
+    private Animator ballAnimator;
 
     [SerializeField]
-    private bool Rolling;
+    private bool rolling;
 
     private Vector3 _position;
-    
     private bool _startRolling;
 
-    public void Start()
+    private void Start()
     {
         _startRolling = false;
         _position = transform.position;
@@ -34,29 +33,22 @@ public class BallMovement : MonoBehaviour, IInteractable, IControllable
     {
         if (speed > 0.0f && _startRolling)
         {
-            BallAnimator.SetBool("Roll", true);
-            Rolling = true;
+            ballAnimator.SetBool("Roll", true);
+            rolling = true;
         }
         else
         {
-            BallAnimator.SetBool("Roll", false);
-            Rolling = false;
+            ballAnimator.SetBool("Roll", false);
+            rolling = false;
         }
 
         if (speed <= 0.0f || (transform.position == _position && _startRolling))
         {
-            Destroy(Stone);
+            Destroy(stone);
         }
     }
 
-    public void Control()
-    {
-        _position = target.position;
-        Rolling = true;
-        _startRolling = true;
-    }
-
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         transform.LookAt(_position);
         transform.Rotate(new Vector3(0, -90, 0), Space.Self);
@@ -71,9 +63,16 @@ public class BallMovement : MonoBehaviour, IInteractable, IControllable
             speed -= Time.deltaTime;
     }
 
+    public void Control()
+    {
+        _position = target.position;
+        rolling = true;
+        _startRolling = true;
+    }
+
     public void Interact()
     {
-        if (Rolling)
+        if (rolling)
         {
             PlayerHitBall.Invoke(this, new EventArgs());
         }

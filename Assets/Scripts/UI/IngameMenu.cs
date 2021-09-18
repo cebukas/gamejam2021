@@ -42,17 +42,12 @@ public class IngameMenu : MonoBehaviour
         BallMovement.PlayerHitBall += ShouldRestart;
     }
     
-    void Update()
+    private void Update()
     {
         if (GameManager.Win) return;
-        liveCountText.text = $"Lives: {hero.GetComponent<Health>().GetHealth()}";
-        timeText.text = $"Time left: {Math.Round(gameManager.TimeLeftInSeconds).ToString()}";
+        liveCountText.text = $"Lives: {hero.GetComponent<Health>().GetHealth()}"; //TODO: hardcoded string bad more more languages
+        timeText.text = $"Time left: {Math.Round(gameManager.timeLeftInSeconds).ToString()}";
         notificationTextUI.text = NotificationText;
-    }
-    
-    private void EnableRestartButton()
-    {
-        restartButton.gameObject.SetActive(true);
     }
 
     private void ShouldRestart(object sender, EventArgs a)
@@ -60,6 +55,11 @@ public class IngameMenu : MonoBehaviour
         EnableRestartButton();
     }
 
+    private void EnableRestartButton()
+    {
+        restartButton.gameObject.SetActive(true);
+    }
+    
     private void RestartLevel()
     {
         StartCoroutine(RestartLevelScene());

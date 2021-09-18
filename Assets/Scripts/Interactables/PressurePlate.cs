@@ -3,18 +3,18 @@
 public class PressurePlate : MonoBehaviour, IInteractable
 {
     [SerializeField]
-    private GameObject ControlledGameObject;
+    private GameObject controlledGameObject;
 
     private bool _pressureApplied = false;
 
     public void Interact()
     {
-        if (ControlledGameObject != null && !_pressureApplied)
+        if (controlledGameObject != null && !_pressureApplied)
         {
-            ControlledGameObject.GetComponent<IControllable>().Control();
+            controlledGameObject.GetComponent<IControllable>().Control();
             _pressureApplied = true;
         }
-        else if (ControlledGameObject == null)
+        else if (controlledGameObject == null)
         {
             Debug.LogWarning("Pressure plate doesn't control anything");
         }

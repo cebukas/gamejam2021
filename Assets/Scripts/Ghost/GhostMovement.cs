@@ -2,16 +2,19 @@
  
  public class GhostMovement : MonoBehaviour {
  
-     public Transform target;
-     public float speed;
-     public float lifeTime;
-
-    private Vector3 position;
+    [SerializeField]
+    private Transform target;
+    [SerializeField]
+    private float speed;
+    [SerializeField]
+    private float lifeTime;
+    
+    private Vector3 _position;
     private float _lifeTime;
 
-    void Start()
+    private void Start()
     {
-        position = transform.position;
+        _position = transform.position;
         _lifeTime = lifeTime;
     }
 
@@ -26,7 +29,7 @@
         _lifeTime -= Time.deltaTime;
         if (_lifeTime <= 0){
             _lifeTime = lifeTime;
-            transform.position = position;
+            transform.position = _position;
             gameObject.SetActive(false);
         }
     }

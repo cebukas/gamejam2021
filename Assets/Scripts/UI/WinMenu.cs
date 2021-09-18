@@ -14,7 +14,7 @@ public class WinMenu : MonoBehaviour
     [SerializeField]
     private GameObject winMenuUI;
 
-    void Start()
+    private void Start()
     {
         quitButton.onClick.AddListener(OnMenu);
     }

@@ -18,7 +18,7 @@ public class PauseMenu : MonoBehaviour
     [SerializeField]
     private GameObject _pauseMenuUI;
 
-    void Start()
+    private void Start()
     {
         _resumeButton.onClick.AddListener(TogglePause);
         _quitButton.onClick.AddListener(OnMenu);

@@ -5,7 +5,7 @@ public class AudioManager : MonoBehaviour
 {
     public Sound[] sounds;
 
-    void Awake()
+    private void Awake()
     {
         // NOTE: Some insights on class vs struct for data storage
         // Some things on structs and classes:
@@ -36,7 +36,7 @@ public class AudioManager : MonoBehaviour
         }
 
     }
-    void Start(){
+    private void Start(){
 
         FindObjectOfType<AudioManager>().Play("Background");
     }
