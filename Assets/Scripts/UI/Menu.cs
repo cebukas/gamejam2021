@@ -4,20 +4,24 @@ using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
-    public string sceneNameToLoad;
-    public GameObject mainMenu;
-    public GameObject settingsMenu;
-    public void onPlay()
+    [SerializeField]
+    private string sceneNameToLoad;
+    [SerializeField]
+    private GameObject mainMenu;
+    [SerializeField]
+    private GameObject settingsMenu;
+    
+    public void OnPlay()
     {
         StartCoroutine(LoadYourAsyncScene());
     }
 
-    IEnumerator LoadYourAsyncScene()
+    private IEnumerator LoadYourAsyncScene()
     {
-        //Hardcoding scene name since we have on one..
-        sceneNameToLoad = "Level OLD"; // why b?
+        //Hardcoding scene name since we have only one..
+        sceneNameToLoad = "Level OLD"; 
 
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneNameToLoad);
+        var asyncLoad = SceneManager.LoadSceneAsync(sceneNameToLoad);
 
         while (!asyncLoad.isDone)
         {
@@ -25,19 +29,19 @@ public class Menu : MonoBehaviour
         }
     }
 
-    public void onBack()
+    public void OnBack()
     {
         mainMenu.SetActive(true);
         settingsMenu.SetActive(false);
     }
 
-    public void onSettings()
+    public void OnSettings()
     {
         mainMenu.SetActive(false);
         settingsMenu.SetActive(true);
     }
 
-    public void onExit()
+    public void OnExit()
     {
         Application.Quit();
         Debug.Log("Game is exiting (only in builds)");

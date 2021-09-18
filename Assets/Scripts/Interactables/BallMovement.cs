@@ -3,59 +3,59 @@ using UnityEngine;
 
 public class BallMovement : MonoBehaviour, IInteractable, IControllable
 {
-    public Transform target;
-    public float speed;
-    private Vector3 position;
-
-    public GameObject Stone;
-
     public static event EventHandler PlayerHitBall;
+    
+    [SerializeField]
+    private Transform target;
 
-    public Animator BallAnimator;
+    [SerializeField]
+    private float speed;
+    
+    [SerializeField]
+    private GameObject stone;
 
-    public bool Rolling;
+    [SerializeField]
+    private Animator ballAnimator;
 
+    [SerializeField]
+    private bool rolling;
+
+    private Vector3 _position;
     private bool _startRolling;
 
-    public void Start()
+    private void Start()
     {
         _startRolling = false;
-        position = transform.position;
+        _position = transform.position;
     }
-
-    public void Control()
-    {
-        position = target.position;
-        Rolling = true;
-        _startRolling = true;
-    }
-
+    
     private void Update()
     {
         if (speed > 0.0f && _startRolling)
         {
-            BallAnimator.SetBool("Roll", true);
-            Rolling = true;
+            ballAnimator.SetBool("Roll", true);
+            rolling = true;
         }
         else
         {
-            BallAnimator.SetBool("Roll", false);
-            Rolling = false;
+            ballAnimator.SetBool("Roll", false);
+            rolling = false;
         }
 
-        if (speed <= 0.0f || (transform.position == position && _startRolling))
+        if (speed <= 0.0f || (transform.position == _position && _startRolling))
         {
-            Destroy(Stone);
+            Destroy(stone);
         }
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
-        transform.LookAt(position);
+        transform.LookAt(_position);
         transform.Rotate(new Vector3(0, -90, 0), Space.Self);
 
-        if (Vector3.Distance(transform.position, position) > 1f)
-        { //move if distance from target is greater than 1
+        if (Vector3.Distance(transform.position, _position) > 1f)
+        { 
+            //move if distance from target is greater than 1
             transform.Translate(new Vector3(speed * Time.deltaTime, 0, 0));
         }
 
@@ -63,9 +63,16 @@ public class BallMovement : MonoBehaviour, IInteractable, IControllable
             speed -= Time.deltaTime;
     }
 
+    public void Control()
+    {
+        _position = target.position;
+        rolling = true;
+        _startRolling = true;
+    }
+
     public void Interact()
     {
-        if (Rolling)
+        if (rolling)
         {
             PlayerHitBall.Invoke(this, new EventArgs());
         }

@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Door : MonoBehaviour, IControllable
 {
-    public bool Opened;
+    [SerializeField]
+    private bool _opened;
 
-    void Start()
+    private void Start()
     {
         ChangeDoorState();
     }
@@ -20,13 +18,13 @@ public class Door : MonoBehaviour, IControllable
 
     private void FlipOpen()
     {
-        Opened = !Opened;
+        _opened = !_opened;
     }
 
     private void ChangeDoorState()
     {
         FindObjectOfType<AudioManager>().Play("Door");
-        if (Opened)
+        if (_opened)
         {
             foreach (var s in GetComponentsInChildren<SpriteRenderer>())
                 s.enabled = false;

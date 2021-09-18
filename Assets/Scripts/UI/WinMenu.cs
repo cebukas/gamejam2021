@@ -3,27 +3,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class WinMenu : MonoBehaviour
 {
     [SerializeField]
-    private Button _quitButton;
+    private Button quitButton;
     
     [SerializeField]
-    private GameObject _winMenuUI;
+    private GameObject winMenuUI;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        _quitButton.onClick.AddListener(OnMenu);
+        quitButton.onClick.AddListener(OnMenu);
     }
 
     private void Update()
     {
         if(GameManager.Win)
         {
-            _winMenuUI.SetActive(true);
+            winMenuUI.SetActive(true);
         }
     }
 
