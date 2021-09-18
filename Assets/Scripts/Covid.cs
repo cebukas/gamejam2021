@@ -1,41 +1,47 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Covid : MonoBehaviour
 {
-    public float firstOccurenceTime;
-    public float covidDurationTime;
-    public float covidIntervalTime;
-    public bool isLooping;
-    public ParticleSystem covidParticle;
-
-    public float cooldown;
-    public GameObject player;
-    private float timer;
+    [SerializeField]
+    private float firstOccurenceTime;
+    [SerializeField]
+    private float covidDurationTime;
+    [SerializeField]
+    private float covidIntervalTime;
+    [SerializeField]
+    private bool isLooping;
+    [SerializeField]
+    private ParticleSystem covidParticle;
+    [SerializeField]
+    private float cooldown;
+    [SerializeField]
+    private GameObject player;
+    
+    private float _timer;
+    
     void Start()
     {
         var emission = covidParticle.emission;
         emission.rateOverTime = 50;
         emission.enabled = false;
-        timer = cooldown;
+        _timer = cooldown;
 
         if(isLooping){
-            InvokeRepeating("emitCovid", firstOccurenceTime, covidIntervalTime);
-            InvokeRepeating("stopCovid", firstOccurenceTime + covidDurationTime, covidIntervalTime);
+            InvokeRepeating(nameof(EmitCovid), firstOccurenceTime, covidIntervalTime);
+            InvokeRepeating(nameof(StopCovid), firstOccurenceTime + covidDurationTime, covidIntervalTime);
         }
         else{
-            Invoke("emitCovid", firstOccurenceTime);
-            Invoke("stopCovid", firstOccurenceTime + covidDurationTime);
+            Invoke(nameof(EmitCovid), firstOccurenceTime);
+            Invoke(nameof(StopCovid), firstOccurenceTime + covidDurationTime);
         }
 
     }
     void FixedUpdate()
     {
-        timer -= Time.deltaTime;
+        _timer -= Time.deltaTime;
     }
 
-    public void emitCovid()
+    public void EmitCovid()
     {
         if (Vector3.Distance(player.GetComponent<Transform>().position, this.transform.position) <= 5f){
             GetComponent<AudioSource>().Play();
@@ -44,19 +50,17 @@ public class Covid : MonoBehaviour
         emission.enabled = true;
     }
 
-    public void stopCovid()
+    public void StopCovid()
     {
         var emission = covidParticle.emission;
         emission.enabled = false;
     }
 
-    void OnParticleCollision(GameObject other)
+    private void OnParticleCollision(GameObject other)
     {
-        if(timer <= 0){
-            if(other.tag == "Player"){
-                other.GetComponent<Health>().DoDamage();
-                timer = cooldown;
-            }
-        }
+        if (!(_timer <= 0)) return;
+        if (!other.CompareTag("Player")) return; //TODO (Lukas): TAG_PLAYER
+        other.GetComponent<Health>().DoDamage();
+        _timer = cooldown;
     }
 }

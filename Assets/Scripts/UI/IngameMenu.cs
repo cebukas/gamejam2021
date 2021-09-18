@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class IngameMenu : MonoBehaviour
@@ -11,57 +12,50 @@ public class IngameMenu : MonoBehaviour
     public static string NotificationText;
 
     [SerializeField]
-    private Text _timeText;
+    private Text timeText;
 
     [SerializeField]
-    private Text _liveCountText;
+    private Text liveCountText;
 
     [SerializeField]
-    private Text _notificationTextUI;
+    private Text notificationTextUI;
 
     [SerializeField]
-    private Button _restartButton;
+    private Button restartButton;
 
     [SerializeField]
-    private GameManager _gameManager;
+    private GameManager gameManager;
 
     [SerializeField]
-    private GameObject _hero;
-
-    public void EnableRestartButton()
-    {
-        _restartButton.gameObject.SetActive(true);
-    }
+    private GameObject hero;
 
     private void Start()
     {
         NotificationText = "";
-        _notificationTextUI.text = "";
-        _restartButton.onClick.AddListener(RestartLevel);
-        _restartButton.gameObject.SetActive(false);
+        notificationTextUI.text = "";
+        restartButton.onClick.AddListener(RestartLevel);
+        restartButton.gameObject.SetActive(false);
 
-        GameManager.TimeUp += GameManager_TimeUp;
-        Health.DeathFromDamage += Health_DeathFromDamage;
-        FallTrap.PlayerInTrap += FallTrap_PlayerInTrap;
-        BallMovement.PlayerHitBall += BallMovement_PlayerHitBall;
+        GameManager.TimeUp += ShouldRestart;
+        Health.DeathFromDamage += ShouldRestart;
+        FallTrap.PlayerInTrap += ShouldRestart;
+        BallMovement.PlayerHitBall += ShouldRestart;
     }
-
-    private void BallMovement_PlayerHitBall(object sender, EventArgs e)
+    
+    void Update()
     {
-        EnableRestartButton();
+        if (GameManager.Win) return;
+        liveCountText.text = $"Lives: {hero.GetComponent<Health>().GetHealth()}";
+        timeText.text = $"Time left: {Math.Round(gameManager.TimeLeftInSeconds).ToString()}";
+        notificationTextUI.text = NotificationText;
     }
-
-    private void FallTrap_PlayerInTrap(object sender, EventArgs e)
+    
+    private void EnableRestartButton()
     {
-        EnableRestartButton();
+        restartButton.gameObject.SetActive(true);
     }
 
-    private void Health_DeathFromDamage(object sender, EventArgs e)
-    {
-        EnableRestartButton();
-    }
-
-    private void GameManager_TimeUp(object sender, EventArgs e)
+    private void ShouldRestart(object sender, EventArgs a)
     {
         EnableRestartButton();
     }
@@ -78,16 +72,6 @@ public class IngameMenu : MonoBehaviour
         while (!sceneLoad.isDone)
         {
             yield return null;
-        }
-    }
-
-    void Update()
-    {
-        if (!GameManager.Win)
-        {
-            _liveCountText.text = $"Lives: {_hero.GetComponent<Health>().GetHealth()}";
-            _timeText.text = $"Time left: {Math.Round(_gameManager.TimeLeftInSeconds).ToString()}";
-            _notificationTextUI.text = NotificationText;
         }
     }
 }

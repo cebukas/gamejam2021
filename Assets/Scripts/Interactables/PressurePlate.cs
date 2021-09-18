@@ -1,10 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PressurePlate : MonoBehaviour, IInteractable
 {
-    public GameObject ControlledGameObject;
+    [SerializeField]
+    private GameObject ControlledGameObject;
 
     private bool _pressureApplied = false;
 

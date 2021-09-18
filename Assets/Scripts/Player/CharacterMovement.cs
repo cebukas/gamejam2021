@@ -4,25 +4,34 @@ using UnityEngine;
 
 public class CharacterMovement : MonoBehaviour
 {
-    public float Speed = 10f;
-    public KeyCode InteractButton = KeyCode.E;
+    [SerializeField]
+    private float Speed = 10f;
+    [SerializeField]
+    private KeyCode InteractButton = KeyCode.E;
+    [SerializeField]
+    private Animator animator;
 
     private bool _frozenMovement = false;
     private bool _interactionAvailable = false;
     private GameObject _interactableGO = null;
     private Rigidbody2D _rigidbody;
-
-    public Animator animator;
-    private Vector2 movement;
+    private Vector2 _movement;
+    
+    private void Start()
+    {
+        _frozenMovement = false;
+        _rigidbody = GetComponent<Rigidbody2D>();
+    }
     
     void Update()
     {
-        movement.x = Input.GetAxisRaw("Horizontal");
-        movement.y = Input.GetAxisRaw("Vertical");
+        _movement.x = Input.GetAxisRaw("Horizontal");
+        _movement.y = Input.GetAxisRaw("Vertical");
 
-        animator.SetFloat("Horizontal", movement.x);
-        animator.SetFloat("Vertical", movement.y);
-        animator.SetFloat("Speed", movement.sqrMagnitude);
+        //TODO (Lukas): String ids
+        animator.SetFloat("Horizontal", _movement.x);
+        animator.SetFloat("Vertical", _movement.y);
+        animator.SetFloat("Speed", _movement.sqrMagnitude);
         if (_interactionAvailable)
         {
             if (Input.GetKeyDown(InteractButton))
@@ -37,39 +46,31 @@ public class CharacterMovement : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        _frozenMovement = false;
-        _rigidbody = GetComponent<Rigidbody2D>();
-    }
-
     private void FixedUpdate()
     {
         if(!GetComponent<AudioSource>().isPlaying){
                 GetComponent<AudioSource>().Play();
         }
-        if(movement.x == 0 && movement.y == 0){
+        if(_movement.x == 0 && _movement.y == 0){
                GetComponent<AudioSource>().Stop();
         }
 
         if (!_frozenMovement)
         {
-            _rigidbody.velocity = new Vector2(movement.x * Speed, movement.y * Speed);
+            _rigidbody.velocity = new Vector2(_movement.x * Speed, _movement.y * Speed);
         } else
         {
-            movement.x = 0f;
-            movement.y = 0f;
-            _rigidbody.velocity = movement;
+            _movement.x = 0f;
+            _movement.y = 0f;
+            _rigidbody.velocity = _movement;
         }
     }
 
     private void InvokeInteraction()
     {
-        if (_interactableGO != null)
-        {
-            var interactable = _interactableGO.GetComponent<IInteractable>();
-            interactable.Interact();
-        }
+        if (_interactableGO == null) return;
+        var interactable = _interactableGO.GetComponent<IInteractable>();
+        interactable.Interact();
     }
 
     public void Freeze()
@@ -94,12 +95,10 @@ public class CharacterMovement : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Interactable"))
-        {
-            _interactionAvailable = false;
-            IngameMenu.NotificationText = "";
-            _interactableGO = null;
-        }
+        if (!collision.gameObject.CompareTag("Interactable")) return;
+        _interactionAvailable = false;
+        IngameMenu.NotificationText = "";
+        _interactableGO = null;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -124,11 +123,9 @@ public class CharacterMovement : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Interactable"))
-        {
-            _interactionAvailable = false;
-            IngameMenu.NotificationText = "";
-            _interactableGO = null;
-        }
+        if (!collision.gameObject.CompareTag("Interactable")) return;
+        _interactionAvailable = false;
+        IngameMenu.NotificationText = "";
+        _interactableGO = null;
     }
 }

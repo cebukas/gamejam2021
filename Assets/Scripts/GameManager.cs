@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public float TimeLeftInSeconds = 900f;
     public static event EventHandler TimeUp;
     public static bool GameOver = false;
-
     public static bool TimeCountDown = true;
+
+    public float TimeLeftInSeconds = 900f;
 
     private bool _timeUpFired = false;
 
@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
             if (TimeLeftInSeconds <= 0 && !_timeUpFired)
             {
                 // Start Time's up sequence
-                TimeUp.Invoke(this, new EventArgs());
+                TimeUp?.Invoke(this, new EventArgs());
                 _timeUpFired = true;
             }
         }

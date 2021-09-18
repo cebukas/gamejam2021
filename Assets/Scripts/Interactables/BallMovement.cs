@@ -3,33 +3,33 @@ using UnityEngine;
 
 public class BallMovement : MonoBehaviour, IInteractable, IControllable
 {
-    public Transform target;
-    public float speed;
-    private Vector3 position;
-
-    public GameObject Stone;
-
     public static event EventHandler PlayerHitBall;
+    
+    [SerializeField]
+    private Transform target;
 
-    public Animator BallAnimator;
+    [SerializeField]
+    private float speed;
+    
+    [SerializeField]
+    private GameObject Stone;
 
-    public bool Rolling;
+    [SerializeField]
+    private Animator BallAnimator;
 
+    [SerializeField]
+    private bool Rolling;
+
+    private Vector3 _position;
+    
     private bool _startRolling;
 
     public void Start()
     {
         _startRolling = false;
-        position = transform.position;
+        _position = transform.position;
     }
-
-    public void Control()
-    {
-        position = target.position;
-        Rolling = true;
-        _startRolling = true;
-    }
-
+    
     private void Update()
     {
         if (speed > 0.0f && _startRolling)
@@ -43,19 +43,27 @@ public class BallMovement : MonoBehaviour, IInteractable, IControllable
             Rolling = false;
         }
 
-        if (speed <= 0.0f || (transform.position == position && _startRolling))
+        if (speed <= 0.0f || (transform.position == _position && _startRolling))
         {
             Destroy(Stone);
         }
     }
 
+    public void Control()
+    {
+        _position = target.position;
+        Rolling = true;
+        _startRolling = true;
+    }
+
     void FixedUpdate()
     {
-        transform.LookAt(position);
+        transform.LookAt(_position);
         transform.Rotate(new Vector3(0, -90, 0), Space.Self);
 
-        if (Vector3.Distance(transform.position, position) > 1f)
-        { //move if distance from target is greater than 1
+        if (Vector3.Distance(transform.position, _position) > 1f)
+        { 
+            //move if distance from target is greater than 1
             transform.Translate(new Vector3(speed * Time.deltaTime, 0, 0));
         }
 

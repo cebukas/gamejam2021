@@ -3,41 +3,42 @@ using UnityEngine;
 
 public class Teleport : MonoBehaviour
 {
+    [SerializeField]
+    private Transform destination;
+    [SerializeField]
+    private Transform trigger;
+    [SerializeField]
+    private GameObject player;
+    [SerializeField]
+    private bool FinalTeleport = false;
 
-    public Transform destination;
-    public Transform trigger;
-    public GameObject player;
-    private SpriteRenderer rend;
-
-    public bool FinalTeleport = false;
-
+    private SpriteRenderer _renderer;
+   
     void Start()
     {
-        rend = player.GetComponent<SpriteRenderer>();
+        _renderer = player.GetComponent<SpriteRenderer>();
     }
 
     void FixedUpdate()
     {
-        if (Vector3.Distance(player.GetComponent<Transform>().position, trigger.position) <= 1f)
-        {
-            player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
-            StartCoroutine("FadeIn");
-            FindObjectOfType<AudioManager>().Play("Teleport");
-            player.GetComponent<Transform>().position = destination.position;
+        if (!(Vector3.Distance(player.GetComponent<Transform>().position, trigger.position) <= 1f)) return;
+        player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+        StartCoroutine("FadeIn");
+        FindObjectOfType<AudioManager>().Play("Teleport");
+        player.GetComponent<Transform>().position = destination.position;
 
-            if(FinalTeleport)
-            {
-                GameManager.Win = true;
-            }
+        if(FinalTeleport)
+        {
+            GameManager.Win = true;
         }
     }
     IEnumerator FadeIn()
     {
-        for (float f = 0.05f; f <= 1; f += 0.05f)
+        for (var f = 0.05f; f <= 1; f += 0.05f)
         {
-            Color c = rend.material.color;
+            var c = _renderer.material.color;
             c.a = f;
-            rend.material.color = c;
+            _renderer.material.color = c;
             yield return new WaitForSeconds(0.05f);
         }
         player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
@@ -46,14 +47,12 @@ public class Teleport : MonoBehaviour
 
     IEnumerator FadeOut()
     {
-
-        for (float f = 1; f >= 0.05f; f -= 0.05f)
+        for (var f = 1f; f >= 0.05f; f -= 0.05f)
         {
-            Color c = rend.material.color;
+            var c = _renderer.material.color;
             c.a = f;
-            rend.material.color = c;
+            _renderer.material.color = c;
             yield return new WaitForSeconds(0.05f);
         }
-
     }
 }
