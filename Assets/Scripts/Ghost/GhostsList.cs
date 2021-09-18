@@ -1,28 +1,21 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class GhostsList : MonoBehaviour
 {
-    public List<GameObject> objs;
-    public List<float> waitTime;
-    private List<float> _waitTime;
-    // Start is called before the first frame update
-    void Start()
-    {
-        _waitTime = new List<float>(waitTime);
-    }
+    [SerializeField]
+    private List<GameObject> objs;
+    [SerializeField]
+    private List<float> waitTime;
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        for (int i = 0; i < objs.Capacity; i++)
+        for (var i = 0; i < objs.Capacity; i++)
         {
-            _waitTime[i] -= Time.deltaTime;
-            if(_waitTime[i] <= 0) {
-                objs[i].SetActive(true);
-                _waitTime[i] = waitTime[i];
-            }
+            waitTime[i] -= Time.deltaTime;
+            if (!(waitTime[i] <= 0)) continue;
+            objs[i].SetActive(true);
+            waitTime[i] = waitTime[i];
         }
     }
 }

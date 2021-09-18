@@ -1,19 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class LightRotation : MonoBehaviour
 {
-    public int speedInDegrees;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField]
+    private int speedInDegrees;
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        transform.Rotate (0,0,speedInDegrees*Time.deltaTime);
+        transform.Rotate (0,0,speedInDegrees * Time.deltaTime);
     }
 }

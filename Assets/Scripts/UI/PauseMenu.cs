@@ -18,10 +18,18 @@ public class PauseMenu : MonoBehaviour
     [SerializeField]
     private GameObject _pauseMenuUI;
 
-    void Start()
+    private void Start()
     {
         _resumeButton.onClick.AddListener(TogglePause);
         _quitButton.onClick.AddListener(OnMenu);
+    }
+    
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Escape) && !GameManager.GameOver)
+        {
+            TogglePause();
+        }
     }
 
     private void OnMenu()
@@ -36,14 +44,6 @@ public class PauseMenu : MonoBehaviour
         while (!sceneLoad.isDone)
         {
             yield return null;
-        }
-    }
-
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.Escape) && !GameManager.GameOver)
-        {
-            TogglePause();
         }
     }
 

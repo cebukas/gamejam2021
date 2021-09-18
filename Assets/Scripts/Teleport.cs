@@ -3,57 +3,62 @@ using UnityEngine;
 
 public class Teleport : MonoBehaviour
 {
+    [SerializeField]
+    private Transform destination;
+    [SerializeField]
+    private Transform trigger;
+    [SerializeField]
+    private GameObject player;
+    [SerializeField]
+    private bool finalTeleport = false;
 
-    public Transform destination;
-    public Transform trigger;
-    public GameObject player;
-    private SpriteRenderer rend;
-
-    public bool FinalTeleport = false;
-
-    void Start()
+    private SpriteRenderer _renderer;
+   
+    private void Start()
     {
-        rend = player.GetComponent<SpriteRenderer>();
+        _renderer = player.GetComponent<SpriteRenderer>();
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
-        if (Vector3.Distance(player.GetComponent<Transform>().position, trigger.position) <= 1f)
-        {
-            player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
-            StartCoroutine("FadeIn");
-            FindObjectOfType<AudioManager>().Play("Teleport");
-            player.GetComponent<Transform>().position = destination.position;
+        IsTeleporting();
+    }
 
-            if(FinalTeleport)
-            {
-                GameManager.Win = true;
-            }
+    private void IsTeleporting()
+    {
+        if (!((player.GetComponent<Transform>().position - trigger.position).sqrMagnitude <= 1f)) return;
+        player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+        StartCoroutine("FadeIn");
+        FindObjectOfType<AudioManager>().Play("Teleport");
+        player.GetComponent<Transform>().position = destination.position;
+
+        if(finalTeleport)
+        {
+            GameManager.Win = true;
         }
     }
-    IEnumerator FadeIn()
+
+    private IEnumerator FadeIn()
     {
-        for (float f = 0.05f; f <= 1; f += 0.05f)
+        for (var f = 0.05f; f <= 1; f += 0.05f)
         {
-            Color c = rend.material.color;
+            var c = _renderer.material.color;
             c.a = f;
-            rend.material.color = c;
+            _renderer.material.color = c;
             yield return new WaitForSeconds(0.05f);
         }
         player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
         player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 
-    IEnumerator FadeOut()
+    private IEnumerator FadeOut()
     {
-
-        for (float f = 1; f >= 0.05f; f -= 0.05f)
+        for (var f = 1f; f >= 0.05f; f -= 0.05f)
         {
-            Color c = rend.material.color;
+            var c = _renderer.material.color;
             c.a = f;
-            rend.material.color = c;
+            _renderer.material.color = c;
             yield return new WaitForSeconds(0.05f);
         }
-
     }
 }

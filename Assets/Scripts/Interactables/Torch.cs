@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Torch : MonoBehaviour, IInteractable
 {
@@ -11,10 +8,17 @@ public class Torch : MonoBehaviour, IInteractable
     [SerializeField]
     private Sprite _torchUnlit;
 
-    private bool _torchIsLit = false;
-
     [SerializeField]
     private GameObject _lightSource;
+    
+    private bool _torchIsLit = false;
+
+    public void Start()
+    {
+        _lightSource.SetActive(false);
+        GetComponent<SpriteRenderer>().sprite = _torchUnlit;
+        _torchIsLit = false;
+    }
     
     public void Interact()
     {
@@ -35,12 +39,5 @@ public class Torch : MonoBehaviour, IInteractable
             _lightSource.SetActive(false);
             GetComponent<SpriteRenderer>().sprite = _torchUnlit;
         }
-    }
-
-    public void Start()
-    {
-        _lightSource.SetActive(false);
-        GetComponent<SpriteRenderer>().sprite = _torchUnlit;
-        _torchIsLit = false;
     }
 }

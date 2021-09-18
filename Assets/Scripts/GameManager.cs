@@ -3,14 +3,13 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public float TimeLeftInSeconds = 900f;
     public static event EventHandler TimeUp;
     public static bool GameOver = false;
-
     public static bool TimeCountDown = true;
 
     private bool _timeUpFired = false;
 
+    public float timeLeftInSeconds = 900f;
     public static bool Win { get; internal set; }
 
     private void Start()
@@ -18,20 +17,21 @@ public class GameManager : MonoBehaviour
         Win = false;
         GameOver = false;
         Time.timeScale = 1.0f;
-        TimeLeftInSeconds = 900f;
+        timeLeftInSeconds = 900f;
     }
 
-    void Update()
+    private void Update()
     {
-        if (TimeCountDown)
-        {
-            TimeLeftInSeconds -= Time.deltaTime;
-            if (TimeLeftInSeconds <= 0 && !_timeUpFired)
-            {
-                // Start Time's up sequence
-                TimeUp.Invoke(this, new EventArgs());
-                _timeUpFired = true;
-            }
-        }
+        decreaseTime();
+    }
+
+    private void decreaseTime()
+    {
+        if (!TimeCountDown) return;
+        timeLeftInSeconds -= Time.deltaTime;
+        if (timeLeftInSeconds >= 0 || _timeUpFired) return;
+        // Start Time's up sequence
+        TimeUp?.Invoke(this, new EventArgs());
+        _timeUpFired = true;
     }
 }
