@@ -2,20 +2,28 @@
 
 public class FollowingLight : MonoBehaviour
 {
-
     private Camera mainCamera;
 
     private void Start()
     {
         mainCamera = Camera.main;
+        var rotZ = GetAnglesBetweenCenterAndMousePosition();
+        transform.eulerAngles = new Vector3(0f, 0f, rotZ);
     }
 
     private void Update()
     {
-        var difference = mainCamera.ScreenToWorldPoint(Input.mousePosition) - transform.position; // subtracting the position of the player from the mouse mous position 
-        //Debug.Log("Text");
-        difference.Normalize(); // normalizing the vector. meaning that all the sum of the vector will be equal to 1
-        var rotZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg; //find the angle in degrees
-        transform.rotation = Quaternion.Euler(0f, 0f, rotZ + 90 );
+        var rotZ = GetAnglesBetweenCenterAndMousePosition();
+        transform.rotation = Quaternion.Euler(0f, 0f, rotZ);
+    }
+
+    // return angles needed to rotate light
+    private float GetAnglesBetweenCenterAndMousePosition()
+    {
+        var mousePos = Input.mousePosition;
+        mousePos.x -= Screen.width / 2;
+        mousePos.y -= Screen.height / 2;
+        mousePos.Normalize();
+        return Mathf.Atan2(mousePos.y, mousePos.x) * Mathf.Rad2Deg - 90;
     }
 }
