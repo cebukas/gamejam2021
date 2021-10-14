@@ -1,6 +1,11 @@
 ﻿using System;
+using Interfaces;
 using UnityEngine;
 
+// Do not use this class
+// Ball of death needs to be reworked or scrapped completely.
+
+[Obsolete]
 public class BallMovement : MonoBehaviour, IInteractable, IControllable
 {
     public static event EventHandler PlayerHitBall;
@@ -63,8 +68,9 @@ public class BallMovement : MonoBehaviour, IInteractable, IControllable
             speed -= Time.deltaTime;
     }
 
-    public void Control()
+    public void React()
     {
+        Debug.Log("Ball should be moving (kinda), that's enough for now");
         _position = target.position;
         rolling = true;
         _startRolling = true;

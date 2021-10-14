@@ -1,4 +1,7 @@
-﻿public interface IControllable 
+﻿namespace Interfaces
 {
-    void Control();
+    public interface IControllable 
+    {
+        void React();
+    }
 }
