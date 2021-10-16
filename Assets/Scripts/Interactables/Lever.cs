@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Interfaces;
+using UnityEngine;
 
 public class Lever : MonoBehaviour, IInteractable
 { 
@@ -22,7 +23,7 @@ public class Lever : MonoBehaviour, IInteractable
         {
             foreach(var controlledObject in controlledGameObjects)
             {
-                controlledObject.GetComponent<IControllable>().Control();
+                controlledObject.GetComponent<IControllable>().React();
             }
         }
         else
