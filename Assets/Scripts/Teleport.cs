@@ -1,7 +1,8 @@
 ﻿using System.Collections;
+using Interactables;
 using UnityEngine;
 
-public class Teleport : MonoBehaviour
+public class Teleport : MonoBehaviour, IActivable
 {
     [SerializeField]
     private Transform destination;
@@ -27,15 +28,7 @@ public class Teleport : MonoBehaviour
     private void IsTeleporting()
     {
         if (!((player.GetComponent<Transform>().position - trigger.position).sqrMagnitude <= 1f)) return;
-        player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
-        StartCoroutine("FadeIn");
-        FindObjectOfType<AudioManager>().Play("Teleport");
-        player.GetComponent<Transform>().position = destination.position;
-
-        if(finalTeleport)
-        {
-            GameManager.Win = true;
-        }
+        Activate();
     }
 
     private IEnumerator FadeIn()
@@ -59,6 +52,19 @@ public class Teleport : MonoBehaviour
             c.a = f;
             _renderer.material.color = c;
             yield return new WaitForSeconds(0.05f);
+        }
+    }
+
+    public void Activate()
+    {
+        player.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
+        StartCoroutine("FadeIn");
+        FindObjectOfType<AudioManager>().Play("Teleport");
+        player.GetComponent<Transform>().position = destination.position;
+
+        if(finalTeleport)
+        {
+            GameManager.Win = true;
         }
     }
 }

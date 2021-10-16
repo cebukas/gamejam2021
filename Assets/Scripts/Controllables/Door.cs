@@ -26,20 +26,15 @@ namespace Controllables
         private void ChangeDoorState()
         {
             FindObjectOfType<AudioManager>().Play("Door");
-            if (_opened)
-            {
-                foreach (var s in GetComponentsInChildren<SpriteRenderer>())
-                    s.enabled = false;
-                foreach (var c in GetComponentsInChildren<BoxCollider2D>())
-                    c.isTrigger = true;
-            }
-            else
-            {
-                foreach (var s in GetComponentsInChildren<SpriteRenderer>())
-                    s.enabled = true;
-                foreach (var c in GetComponentsInChildren<BoxCollider2D>())
-                    c.isTrigger = false;
-            }
+            TraverseDoorComponents(_opened, !_opened);
+        }
+
+        private void TraverseDoorComponents(bool doorEnabled, bool isTrigger)
+        {
+            foreach (var s in GetComponentsInChildren<SpriteRenderer>())
+                s.enabled = doorEnabled;
+            foreach (var c in GetComponentsInChildren<BoxCollider2D>())
+                c.isTrigger = isTrigger;
         }
     }
 }

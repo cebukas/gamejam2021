@@ -2,7 +2,7 @@
 using Interactables;
 using UnityEngine;
 
-public class FallTrap : MonoBehaviour, IActivateable
+public class FallTrap : MonoBehaviour, IActivable
 {
     public static event EventHandler PlayerInTrap;
 

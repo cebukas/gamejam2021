@@ -3,7 +3,7 @@ using Interactables;
 using Interfaces;
 using UnityEngine;
 
-public class PressurePlate : MonoBehaviour, IActivateable
+public class PressurePlate : MonoBehaviour, IActivable
 {
     [SerializeField]
     private GameObject controlledGameObject;
