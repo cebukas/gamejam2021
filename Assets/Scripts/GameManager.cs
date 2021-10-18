@@ -1,4 +1,8 @@
-﻿using System;
+﻿/*
+ * This class should contain and control game data needed during overall gameplay
+ */
+
+using System;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -11,7 +15,7 @@ public class GameManager : MonoBehaviour
 
     public float timeLeftInSeconds = 900f;
     public static bool Win { get; internal set; }
-
+    
     private void Start()
     {
         Win = false;
