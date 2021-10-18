@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class IngameMenu : MonoBehaviour
@@ -36,10 +33,10 @@ public class IngameMenu : MonoBehaviour
         restartButton.onClick.AddListener(RestartLevel);
         restartButton.gameObject.SetActive(false);
 
-        GameManager.TimeUp += ShouldRestart;
-        Health.DeathFromDamage += ShouldRestart;
-        FallTrap.PlayerInTrap += ShouldRestart;
-        BallMovement.PlayerHitBall += ShouldRestart;
+        GameManager.TimeUp += OnRestart;
+        Health.DeathFromDamage += OnRestart;
+        FallTrap.PlayerInTrap += OnRestart;
+        BallMovement.PlayerHitBall += OnRestart;
     }
     
     private void Update()
@@ -50,9 +47,22 @@ public class IngameMenu : MonoBehaviour
         notificationTextUI.text = NotificationText;
     }
 
-    private void ShouldRestart(object sender, EventArgs a)
+    private void OnRestart(object sender, EventArgs a)
     {
         EnableRestartButton();
+    }
+
+    private void OnDestroy()
+    {
+        UnsubscribeFromEvents();
+    }
+
+    private void UnsubscribeFromEvents()
+    {
+        GameManager.TimeUp -= OnRestart;
+        Health.DeathFromDamage -= OnRestart;
+        FallTrap.PlayerInTrap -= OnRestart;
+        BallMovement.PlayerHitBall -= OnRestart;
     }
 
     private void EnableRestartButton()
